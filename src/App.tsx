@@ -1,25 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { Report } from './components/Report/Report';
+import { ReportModel } from './domain/ReportModel';
+import { SectionModel } from './domain/SectionModel';
+import { AppWrapper } from './App.styled';
+import { SectionFieldModel } from './domain/SectionFieldModel';
+import { ThemeProvider, initializeIcons } from '@fluentui/react';
+
+const reportModel = new ReportModel();
+reportModel.name = "Some Report";
+reportModel.sections = [
+  new SectionModel({
+    name: 'Section 1', fields: [
+      new SectionFieldModel({ name: 'Field 1', value: 'some value' }),
+      new SectionFieldModel({ name: 'Field 2', value: '' }),
+    ]
+  }),
+  new SectionModel({
+    name: 'Section 2', fields: [
+      new SectionFieldModel({ name: 'Field 3', value: '' }),
+      new SectionFieldModel({ name: 'Field 4', value: '' }),
+    ]
+  }),
+  new SectionModel({
+    name: 'Section 3', fields: [
+      new SectionFieldModel({ name: 'Field 5', value: '' }),
+      new SectionFieldModel({ name: 'Field 6', value: '' })
+    ]
+  }),
+];
+
 
 function App() {
+
+  const [report] = useState(reportModel);
+  initializeIcons();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider>
+      <AppWrapper>
+        <Report report={report} />
+      </AppWrapper>
+    </ThemeProvider>
   );
 }
 
