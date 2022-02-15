@@ -1,47 +1,58 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { SectionModel } from '../../domain/SectionModel';
 import { SectionField } from '../SectionField/SectionField';
 import { SectionWrapper } from './Section.styled';
 import { useState } from 'react';
-import { ActionButton, IIconProps } from '@fluentui/react';
+import { ActionButton, IIconProps, TextField } from '@fluentui/react';
 import { SectionFieldModel } from './../../domain/SectionFieldModel';
+import { Control, Controller, FieldValues, useFieldArray, useFormContext } from 'react-hook-form';
+import { ReportModel } from '../../domain/ReportModel';
 
 
-export const Section: React.FunctionComponent<{
-    section: SectionModel, 
-    onChange: (item: SectionModel) => void}> = ({ section, onChange }) => {
-    
+
+type FormValues = {
+    fields: SectionFieldModel[];
+};
+
+
+export const Section: React.FunctionComponent<{ control: Control<ReportModel>, register: any, index: number }> = ({ control, register, index }) => {
+
+
+    // const context = useFormContext();
+
+
     const addIcon: IIconProps = { iconName: 'Add' };
-    
-    const [sectionModel, setSectionModel] = useState<SectionModel>(section);
+    // context.setValue(`sections.${index}.fields`, section.fields);
+    // const [sectionModel, setSectionModel] = useState(section);
 
-    const handeOnChange = (index: number) => (newValue: string) => {
-    
-        const copy = sectionModel.clone();
-        copy.fields[index].value = newValue;
-        copy.validate();
-        setSectionModel(copy);
-        onChange(sectionModel);
 
-    }
+    const { fields, append } = useFieldArray({
+        name: `sections.${index}.fields`,
+        control
+    });
+    console.log({ fields });
 
-    const handleAddNewField = () => {
-        const currentIndex = section.fields.length;
-        const field = new SectionFieldModel({name: `Field ${currentIndex}`, value: ''});
-        const copy = sectionModel.clone();
-        copy.fields.push(field);
-        copy.validate();
-        setSectionModel(copy);
-    }
+    useEffect(() => {
+        // sectionModel.validate();
+        console.log('Rendering section ', fields);
+    }, [fields]);
 
     return <SectionWrapper>
-        <h5>{sectionModel.name}</h5>
+        {/* <h5>{sectionModel.name}</h5> */}
         {
-            sectionModel.fields.map((field, index) => 
-            (<SectionField key={field.id} sectionField={field}  onChange={handeOnChange(index)} />)
+            fields.map((item, i) =>
+            (
+                <Controller
+                    key={item.id}
+                    name={`sections.${index}.fields.${i}.value`}
+                    control={control}
+                    defaultValue={item.value}
+                    render={({ field }) => <TextField {...field} label={item.name} />}
+                />
+            )
             )
         }
 
-        <ActionButton iconProps={addIcon} text='Add new field' onClick={handleAddNewField}/>
+        <ActionButton iconProps={addIcon} text='Add new field' onClick={() => append(new SectionFieldModel({ name: 'new', value: '' }))} />
     </SectionWrapper>
 }

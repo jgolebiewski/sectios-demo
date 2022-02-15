@@ -10,11 +10,10 @@ export class SectionModel {
 
     fields: SectionFieldModel[] = [];
 
-    isValid: boolean = false;
 
-    constructor(data?: {name: string, fields: SectionFieldModel[]}) {
+    constructor(data?: { name: string, fields: SectionFieldModel[] }) {
         if (data) {
-               Object.assign(this, data); 
+            Object.assign(this, data);
         }
     }
 
@@ -22,9 +21,5 @@ export class SectionModel {
         const clone = new SectionModel();
         Object.assign(clone, this);
         return clone;
-    }
-
-    validate(): void {
-        this.isValid =  !this.fields.some(field => field.value.length === 0);
     }
 }
