@@ -1,25 +1,16 @@
 import React, { useEffect } from 'react';
-import { SectionModel } from '../../domain/SectionModel';
-import { SectionField } from '../SectionField/SectionField';
 import { SectionWrapper } from './Section.styled';
-import { useState } from 'react';
 import { ActionButton, IIconProps, TextField } from '@fluentui/react';
 import { SectionFieldModel } from './../../domain/SectionFieldModel';
-import { Control, Controller, FieldValues, useFieldArray, useFormContext } from 'react-hook-form';
+import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { ReportModel } from '../../domain/ReportModel';
 
 
-
-type FormValues = {
-    fields: SectionFieldModel[];
-};
+export const Section: React.FunctionComponent<{ index: number }> = ({ index }) => {
 
 
-export const Section: React.FunctionComponent<{ control: Control<ReportModel>, register: any, index: number }> = ({ control, register, index }) => {
-
-
-    // const context = useFormContext();
-
+    const context = useFormContext<ReportModel>();
+    const control = context.control;
 
     const addIcon: IIconProps = { iconName: 'Add' };
     // context.setValue(`sections.${index}.fields`, section.fields);

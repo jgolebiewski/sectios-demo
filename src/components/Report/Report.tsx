@@ -6,20 +6,14 @@ import { ActionButton, DefaultButton, Icon, IIconProps, IPivotItemProps, Pivot, 
 import { useState } from 'react';
 import { SectionModel } from '../../domain/SectionModel';
 import { ReportWrapper, TittleWrapper } from './Report.styled';
-import { Controller, FormProvider, useFieldArray, useForm } from 'react-hook-form';
-import { SectionFieldModel } from '../../domain/SectionFieldModel';
-
-
-type FormValues = {
-    sections: SectionModel[];
-};
+import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 
 
 export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ report }) => {
     const addIcon: IIconProps = { iconName: 'Add' };
     const [reportModel, setReportModel] = useState<ReportModel>(report);
 
-    const { control, register, handleSubmit } = useForm<ReportModel>({
+    const methods = useForm<ReportModel>({
         defaultValues: {
             sections: report.sections
         }
@@ -29,7 +23,7 @@ export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ repor
 
     const { fields: sections, append: appendSection } = useFieldArray({
         name: 'sections',
-        control: control
+        control: methods.control
     });
 
     // const { fields, append: appendField } = useFieldArray({
@@ -37,7 +31,7 @@ export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ repor
     //     control: methods.control
     // });
 
-    console.log('top', control);
+
 
     useEffect(() => {
         console.log('Rendering report');
@@ -111,24 +105,25 @@ export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ repor
             <h1> {reportModel.name} </h1>
             <ActionButton iconProps={addIcon} text='Add new section' onClick={handleAddNewSection} />
         </TittleWrapper>
+        <FormProvider {...methods}>
+            <form onSubmit={methods.handleSubmit(onSubmit)}>
+                <Pivot>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <Pivot>
-
-                {
-                    sections.map((section: SectionModel, index) => (
-                        <PivotItem headerText={section.name} key={section.id} onRenderItemLink={customRenderer}>
-                            <Section control={control} register={register} index={index} />
-                            <ActionButton iconProps={addIcon} text='Add new field' onClick={() => handleAddNewField(index)} />
-                        </PivotItem>
-                    ))
-                }
-            </Pivot>
-            <Stack horizontal>
-                <PrimaryButton text='Save' type="submit" />
-                <DefaultButton text='Validate' onClick={handleValidator} />
-            </Stack>
-        </form>
+                    {
+                        sections.map((section: SectionModel, index) => (
+                            <PivotItem headerText={section.name} key={section.id} onRenderItemLink={customRenderer}>
+                                <Section index={index} />
+                                <ActionButton iconProps={addIcon} text='Add new field' onClick={() => handleAddNewField(index)} />
+                            </PivotItem>
+                        ))
+                    }
+                </Pivot>
+                <Stack horizontal>
+                    <PrimaryButton text='Save' type="submit" />
+                    <DefaultButton text='Validate' onClick={handleValidator} />
+                </Stack>
+            </form>
+        </FormProvider>
 
     </ReportWrapper>
 
