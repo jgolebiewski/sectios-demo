@@ -1,5 +1,5 @@
 import { TextField } from '@fluentui/react';
-import React, { FC } from 'react';
+import React from 'react';
 
 import { FieldWrapper } from './SectionField.styled';
 

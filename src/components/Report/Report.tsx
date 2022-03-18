@@ -1,12 +1,13 @@
 
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { ReportModel } from '../../domain/ReportModel';
 import { Section } from '../Section/Section';
-import { ActionButton, DefaultButton, Icon, IIconProps, IPivotItemProps, Pivot, PivotItem, PrimaryButton, Stack, TextField } from '@fluentui/react';
+import { ActionButton, DefaultButton, Icon, IIconProps, IPivotItemProps, Pivot, PivotItem, PrimaryButton, Stack } from '@fluentui/react';
 import { useState } from 'react';
 import { SectionModel } from '../../domain/SectionModel';
 import { ReportWrapper, TittleWrapper } from './Report.styled';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
+import { OverView } from '../Overview/Overview';
 
 
 export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ report }) => {
@@ -15,7 +16,8 @@ export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ repor
 
     const methods = useForm<ReportModel>({
         defaultValues: {
-            sections: report.sections
+            sections: report.sections,
+            overview: report.overview,
         }
     });
 
@@ -26,36 +28,15 @@ export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ repor
         control: methods.control
     });
 
-    // const { fields, append: appendField } = useFieldArray({
-    //     name: `sections.0.fields`,
-    //     control: methods.control
-    // });
-
-
 
     useEffect(() => {
         console.log('Rendering report');
     })
 
-    const handleAddNewField = (sectionIndex: number) => {
-        // const field = new SectionFieldModel({ name: 'New', value: '' });
-        // reportModel.sections[sectionIndex].fields.push(field);
-        // console.log(field);
-        // appendField(field);
-    }
-
-    const handleReport = () => {
-        console.log(reportModel);
-    }
 
     const handleAddNewSection = () => {
-        // const copy = reportModel.clone();
-        // copy.sections.push(
-        //     new SectionModel({ name: `Section ${reportModel.sections.length + 1}`, fields: [] })
-        // );
 
-        appendSection(new SectionModel({ name: `Section ${reportModel.sections.length + 1}`, fields: [] }))
-        // setReportModel(copy);
+        appendSection(new SectionModel({ name: `Section ${sections.length + 1}`, fields: [] }))
     }
 
     const handleValidator = () => {
@@ -64,24 +45,18 @@ export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ repor
         setReportModel(copy);
     }
 
-    const onSubmit = (data: any) => console.log('submit', { data });
+    const onSubmit = (data: any) => {
+        console.log('submit', { data }, { reportModel });
+    }
 
     const customRenderer = (link?: IPivotItemProps, defaultRenderer?: (link?: IPivotItemProps) => JSX.Element | null,) => {
-        console.log('customRenderer');
+
         if (!link || !defaultRenderer) {
             return null;
         }
 
         let icon = '';
         let color = '';
-
-        // if (link.itemKey) {
-        // const sectionModel = reportModel.sections[+link.itemKey] as SectionModel;
-        // sectionModel.validate();
-
-        // }
-
-
 
         return (
             <span style={{ flex: '0 1 100%' }}>
@@ -91,15 +66,6 @@ export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ repor
         );
     }
 
-
-    // const handleSectionChange = useCallback((index: number) => (item: SectionModel) => {
-
-    //     const copy = reportModel.clone();
-    //     copy.sections[index] = item;
-    //     console.log(methods.formState.errors);
-    //     setReportModel(reportModel);
-    // }, [reportModel, methods]);
-
     return <ReportWrapper>
         <TittleWrapper>
             <h1> {reportModel.name} </h1>
@@ -107,13 +73,13 @@ export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ repor
         </TittleWrapper>
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
+                <OverView />
                 <Pivot>
 
                     {
                         sections.map((section: SectionModel, index) => (
                             <PivotItem headerText={section.name} key={section.id} onRenderItemLink={customRenderer}>
                                 <Section index={index} />
-                                <ActionButton iconProps={addIcon} text='Add new field' onClick={() => handleAddNewField(index)} />
                             </PivotItem>
                         ))
                     }
