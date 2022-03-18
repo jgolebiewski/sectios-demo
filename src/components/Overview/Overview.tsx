@@ -1,5 +1,5 @@
-import { TextField } from '@fluentui/react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
+import { CustomTextField } from '../../common/CustomTextField/CustomTextField';
 import { OverviewModel } from '../../domain/OverviewModel'
 import { ReportModel } from '../../domain/ReportModel';
 import { OverViewWrapper } from './Overview.styled';
@@ -14,15 +14,16 @@ export const OverView: React.FC<OverviewProps> = (props) => {
 
     return <OverViewWrapper>
         <h2>Overview</h2>
-        <Controller
+        <CustomTextField
             name="overview.name"
+            label="Name"
             control={control}
-            render={({ field }) => <TextField {...field} label='Name' />}
         />
-        <Controller
+
+        <CustomTextField
             name="overview.author"
             control={control}
-            render={({ field }) => <TextField {...field} label='Author' />}
+            label="Author"
         />
     </OverViewWrapper>
 }
