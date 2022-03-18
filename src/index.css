@@ -1,5 +1,4 @@
 body {
-
   margin: 0;
   padding: 0;
   width: 100%;
@@ -11,7 +10,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h3 {
+  margin: 0.1rem;
+  font-size: larger;
+  font-weight: 600;
+}
+
+.ms-TextField {
+  margin: 20px 0;
+}
+
+.ms-TextField.is-disabled .ms-Label {
+  color: rgb(50, 49, 48);
 }

@@ -17,10 +17,8 @@ export const Section: React.FunctionComponent<{ index: number }> = ({ index }) =
         name: `sections.${index}.fields`,
         control
     });
-    console.log({ fields });
 
     useEffect(() => {
-        // sectionModel.validate();
         console.log('Rendering section ', fields);
     }, [fields]);
 
