@@ -1,15 +1,11 @@
 import { DatePicker, defaultDatePickerStrings } from '@fluentui/react';
 import { FC } from 'react';
-import { Control, Controller } from 'react-hook-form';
-import { ReportModel } from '../../domain/ReportModel';
+import { Controller } from 'react-hook-form';
+import { CustomFieldProps } from '../../domain/CustomFieldProps';
 
-interface CustomDatePickerProps {
-    name: any;
-    label: string;
-    control: Control<ReportModel, object>
-}
 
-export const CustomDatePicker: FC<CustomDatePickerProps> = ({ name, label, control }) => {
+
+export const CustomDatePicker: FC<CustomFieldProps> = ({ name, label, control }) => {
 
     return <Controller
         name={name}

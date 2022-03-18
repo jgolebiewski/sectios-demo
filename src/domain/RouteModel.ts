@@ -8,4 +8,6 @@ export class RouteModel {
     startDate: string = (new Date()).toISOString();
 
     endDate: string = (new Date()).toISOString();
+
+    type: string = 'normal';
 }

@@ -1,16 +1,11 @@
 import { TextField } from '@fluentui/react';
 import { FC } from 'react';
-import { Control, Controller } from 'react-hook-form'
-import { ReportModel } from '../../domain/ReportModel';
+import { Controller } from 'react-hook-form'
+import { CustomFieldProps } from '../../domain/CustomFieldProps';
 
-type TextFieldProps = {
-    name: any;
-    label: string;
-    disabled?: boolean;
-    control: Control<ReportModel, object>
-}
 
-export const CustomTextField: FC<TextFieldProps> = (props): JSX.Element => {
+
+export const CustomTextField: FC<CustomFieldProps> = (props): JSX.Element => {
 
     const { name, label, control, disabled } = props;
 
