@@ -6,7 +6,7 @@ import { CustomFieldProps } from '../../domain/CustomFieldProps';
 export const CustomDropdown: FC<CustomFieldProps & { options: IDropdownOption[] }> = ({ name, label, control, disabled, options }) => {
 
 
-    return <Controller
+    return <div className='ms-TextField'><Controller
         name={name}
         control={control}
         render={({ field }) => (
@@ -22,5 +22,6 @@ export const CustomDropdown: FC<CustomFieldProps & { options: IDropdownOption[] 
             />
         )}
     />
+    </div>
 
 }

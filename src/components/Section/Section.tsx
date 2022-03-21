@@ -10,29 +10,44 @@ const addIcon: IIconProps = { iconName: 'Add' };
 
 export const Section: React.FunctionComponent<{ index: number }> = ({ index }) => {
 
-    const context = useFormContext<ReportModel>();
-    const control = context.control;
+    const { control, formState: { errors } } = useFormContext<ReportModel>();
 
-    const { fields, append } = useFieldArray({
+    const { fields: sectionFields, append } = useFieldArray({
         name: `sections.${index}.fields`,
         control
     });
 
     useEffect(() => {
-        console.log('Rendering section ', fields);
-    }, [fields]);
+        console.log('Rendering section ');
+    });
+
+    const getErrorMessage = (fieldIndex: number): any => {
+        let msg = '';
+        if (errors && errors.sections) {
+            const section = errors.sections[index];
+            if (section.fields && Array.isArray(section.fields)) {
+                const field = section.fields[fieldIndex];
+                const value = field && field.value ? field.value : null;
+                msg = value && value.message ? value.message : '';
+            }
+        }
+
+        return msg;
+    }
 
     return <SectionWrapper>
-        {/* <h5>{sectionModel.name}</h5> */}
         {
-            fields.map((item, i) =>
+            sectionFields.map((item, i) =>
             (
-                <CustomTextField
-                    key={i}
-                    name={`sections.${index}.fields.${i}.value`}
-                    control={control}
-                    label={item.name}
-                />
+                <div key={i}>
+                    <CustomTextField
+
+                        name={`sections.${index}.fields.${i}.value`}
+                        control={control}
+                        label={item.name}
+                    />
+                    {errors && <p className='required'> {getErrorMessage(i)}</p>}
+                </div>
             )
             )
         }

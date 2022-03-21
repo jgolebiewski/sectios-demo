@@ -16,10 +16,4 @@ export class SectionModel {
             Object.assign(this, data);
         }
     }
-
-    clone(): SectionModel {
-        const clone = new SectionModel();
-        Object.assign(clone, this);
-        return clone;
-    }
 }

@@ -1,6 +1,5 @@
 import { SectionModel } from "./SectionModel";
 import { v4 as uuidv4 } from 'uuid';
-import { cloneDeep } from 'lodash';
 import { OverviewModel } from './OverviewModel';
 import { RouteModel } from './RouteModel';
 export class ReportModel {
@@ -17,11 +16,4 @@ export class ReportModel {
         new RouteModel(),
         new RouteModel()
     ];
-
-    clone(): ReportModel {
-        const clone = new ReportModel();
-        Object.assign(clone, this);
-        return cloneDeep(this);
-    }
-
 }

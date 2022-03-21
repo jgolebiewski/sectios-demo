@@ -17,9 +17,16 @@ h3 {
 }
 
 .ms-TextField {
-  margin: 20px 0;
+  margin: 20px 0 0 0;
 }
 
 .ms-TextField.is-disabled .ms-Label {
   color: rgb(50, 49, 48);
+}
+
+.required {
+  margin: 0;
+  padding: 0;
+  color: red;
+  font-size: smaller;
 }

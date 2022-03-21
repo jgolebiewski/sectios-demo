@@ -11,7 +11,7 @@ interface OverviewProps {
 
 export const OverView: React.FC<OverviewProps> = (props) => {
 
-    const { control } = useFormContext<ReportModel>();
+    const { control, formState: { errors } } = useFormContext<ReportModel>();
 
     return <Wrapper>
         <h3>Overview</h3>
@@ -20,7 +20,7 @@ export const OverView: React.FC<OverviewProps> = (props) => {
             label="Name"
             control={control}
         />
-
+        {errors && errors.overview && errors.overview.name && <p className='required'>This field is required</p>}
         <CustomTextField
             name="overview.author"
             control={control}
