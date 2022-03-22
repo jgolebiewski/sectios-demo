@@ -25,7 +25,7 @@ export const Section: React.FunctionComponent<{ index: number }> = ({ index }) =
         let msg = '';
         if (errors && errors.sections) {
             const section = errors.sections[index];
-            if (section.fields && Array.isArray(section.fields)) {
+            if (section && section.fields && Array.isArray(section.fields)) {
                 const field = section.fields[fieldIndex];
                 const value = field && field.value ? field.value : null;
                 msg = value && value.message ? value.message : '';

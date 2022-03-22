@@ -4,7 +4,7 @@ import { ReportModel } from './domain/ReportModel';
 import { SectionModel } from './domain/SectionModel';
 import { AppWrapper } from './App.styled';
 import { SectionFieldModel } from './domain/SectionFieldModel';
-import { ThemeProvider, initializeIcons } from '@fluentui/react';
+import { ThemeProvider, initializeIcons, setIconOptions } from '@fluentui/react';
 
 const reportModel = new ReportModel();
 reportModel.name = "Some Report";
@@ -31,9 +31,12 @@ reportModel.sections = [
 
 
 function App() {
-
-  const [report] = useState(reportModel);
   initializeIcons();
+  setIconOptions({
+    disableWarnings: true,
+
+  })
+  const [report] = useState(reportModel);
 
   return (
     <ThemeProvider>

@@ -13,10 +13,11 @@ interface SectionsProps {
 const addIcon: IIconProps = { iconName: 'Add' };
 
 export const Sections: FC<SectionsProps> = (props) => {
-    const context = useFormContext<ReportModel>();
+    const { control, formState: { errors } } = useFormContext<ReportModel>();
+
     const { fields: sections, append: appendSection } = useFieldArray({
         name: 'sections',
-        control: context.control
+        control: control
     });
 
 
@@ -31,13 +32,19 @@ export const Sections: FC<SectionsProps> = (props) => {
             return null;
         }
 
+        const { itemKey } = link;
         let icon = '';
         let color = '';
 
+        if (errors && errors.sections && itemKey) {
+            color = errors.sections[+itemKey] ? 'red' : '';
+            icon = errors.sections[+itemKey] ? 'Important' : '';
+        }
+
         return (
             <span style={{ flex: '0 1 100%' }}>
-                {defaultRenderer({ ...link, itemIcon: undefined })}
-                <Icon iconName={icon} style={{ color: color }} />
+                {defaultRenderer({ ...link })}
+                {icon && <Icon iconName={icon} style={{ color: color }} />}
             </span>
         );
     }
