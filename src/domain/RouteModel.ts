@@ -10,4 +10,6 @@ export class RouteModel {
     endDate: string = (new Date()).toISOString();
 
     type: string = 'normal';
+
+    duration: string = '1 day';
 }

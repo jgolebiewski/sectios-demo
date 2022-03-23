@@ -1,5 +1,5 @@
 import { ActionButton, Icon, IIconProps, IPivotItemProps, Pivot, PivotItem, Stack } from '@fluentui/react';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useFormContext, useFieldArray } from 'react-hook-form';
 import { Wrapper } from '../../common/Wrapper/Wrapper.styled';
 import { ReportModel } from '../../domain/ReportModel';
@@ -20,9 +20,11 @@ export const Sections: FC<SectionsProps> = (props) => {
         control: control
     });
 
+    useEffect(() => {
+        console.log('Rendering sections container ');
+    });
 
     const handleAddNewSection = () => {
-
         appendSection(new SectionModel({ name: `Section ${sections.length + 1}`, fields: [] }))
     }
 

@@ -11,10 +11,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../../schema/validation-schema';
 
 
-
+let renderCount = 0;
 export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ report }) => {
 
-
+    renderCount++;
 
     const methods = useForm<ReportModel>({
         defaultValues: {
@@ -25,15 +25,16 @@ export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ repor
         resolver: yupResolver(schema),
         reValidateMode: 'onBlur',
         criteriaMode: 'all',
-        delayError: 300
+        delayError: 100
     });
 
 
     useEffect(() => {
         console.log('Rendering report');
-    })
+    }, []);
 
     const handleValidator = () => {
+        methods.trigger();
         console.log(methods.formState.isValid)
     }
 
@@ -44,7 +45,7 @@ export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ repor
 
     return <ReportWrapper>
         <TittleWrapper>
-            <h1> {report.name} </h1>
+            <h1> {report.name}  = {renderCount}</h1>
         </TittleWrapper>
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
