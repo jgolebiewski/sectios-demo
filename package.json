@@ -31,7 +31,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "check:circular-deps": "madge --warning --circular --extensions ts,tsx src"
   },
   "eslintConfig": {
     "extends": [
@@ -67,6 +68,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0",
-    "husky": "^7.0.0"
+    "husky": "^7.0.0",
+    "madge": "^5.0.1"
   }
 }
