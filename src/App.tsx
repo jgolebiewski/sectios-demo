@@ -5,7 +5,7 @@ import { AppWrapper } from './App.styled';
 import { ThemeProvider, initializeIcons, setIconOptions } from '@fluentui/react';
 
 const reportModel = new ReportModel();
-reportModel.name = 'Some Report';
+reportModel.name = 'Some awesome Report';
 
 function App() {
     initializeIcons();
