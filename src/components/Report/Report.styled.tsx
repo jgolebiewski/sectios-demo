@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ReportWrapper = styled.div`
     width: 600px;
@@ -8,7 +8,6 @@ export const ReportWrapper = styled.div`
 `;
 
 export const TittleWrapper = styled.div`
-
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -9,19 +9,21 @@ import { CustomTextField } from '../../common/CustomTextField/CustomTextField';
 const addIcon: IIconProps = { iconName: 'Add' };
 
 export const Section: React.FunctionComponent<{ index: number }> = ({ index }) => {
-
-    const { control, formState: { errors } } = useFormContext<ReportModel>();
+    const {
+        control,
+        formState: { errors },
+    } = useFormContext<ReportModel>();
 
     const { fields: sectionFields, append } = useFieldArray({
         name: `sections.${index}.fields`,
-        control
+        control,
     });
 
     useEffect(() => {
         console.log('Rendering section ');
     });
 
-    const getErrorMessage = (fieldIndex: number): any => {
+    const getErrorMessage = (fieldIndex: number): string => {
         let msg = '';
         if (errors && errors.sections) {
             const section = errors.sections[index];
@@ -33,25 +35,22 @@ export const Section: React.FunctionComponent<{ index: number }> = ({ index }) =
         }
 
         return msg;
-    }
+    };
 
-    return <SectionWrapper>
-        {
-            sectionFields.map((item, i) =>
-            (
+    return (
+        <SectionWrapper>
+            {sectionFields.map((item, i) => (
                 <div key={i}>
-                    <CustomTextField
-
-                        name={`sections.${index}.fields.${i}.value`}
-                        control={control}
-                        label={item.name}
-                    />
-                    {errors && <p className='required'> {getErrorMessage(i)}</p>}
+                    <CustomTextField name={`sections.${index}.fields.${i}.value`} control={control} label={item.name} />
+                    {errors && <p className="required"> {getErrorMessage(i)}</p>}
                 </div>
-            )
-            )
-        }
+            ))}
 
-        <ActionButton iconProps={addIcon} text='Add new field' onClick={() => append(new SectionFieldModel({ name: 'new', value: '' }))} />
-    </SectionWrapper>
-}
+            <ActionButton
+                iconProps={addIcon}
+                text="Add new field"
+                onClick={() => append(new SectionFieldModel({ name: 'new', value: '' }))}
+            />
+        </SectionWrapper>
+    );
+};

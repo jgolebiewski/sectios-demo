@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { ReportModel } from '../../domain/ReportModel';
 import { DefaultButton, PrimaryButton, Stack } from '@fluentui/react';
@@ -10,10 +9,8 @@ import { Sections } from '../Sections/Sections';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../../schema/validation-schema';
 
-
 let renderCount = 0;
 export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ report }) => {
-
     renderCount++;
 
     const methods = useForm<ReportModel>({
@@ -25,9 +22,8 @@ export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ repor
         resolver: yupResolver(schema),
         reValidateMode: 'onBlur',
         criteriaMode: 'all',
-        delayError: 100
+        delayError: 100,
     });
-
 
     useEffect(() => {
         console.log('Rendering report');
@@ -35,30 +31,32 @@ export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ repor
 
     const handleValidator = () => {
         methods.trigger();
-        console.log(methods.formState.isValid)
-    }
+        console.log(methods.formState.isValid);
+    };
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: unknown) => {
         console.log('submit', data);
-    }
+    };
 
-
-    return <ReportWrapper>
-        <TittleWrapper>
-            <h1> {report.name}  = {renderCount}</h1>
-        </TittleWrapper>
-        <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)}>
-                <OverView />
-                <Sections />
-                <RoutesComponent />
-                <Stack horizontal>
-                    <PrimaryButton text='Save' type="submit" />
-                    <DefaultButton text='Validate' onClick={handleValidator} />
-                </Stack>
-            </form>
-        </FormProvider>
-
-    </ReportWrapper>
-
-}
+    return (
+        <ReportWrapper>
+            <TittleWrapper>
+                <h1>
+                    {' '}
+                    {report.name} = {renderCount}
+                </h1>
+            </TittleWrapper>
+            <FormProvider {...methods}>
+                <form onSubmit={methods.handleSubmit(onSubmit)}>
+                    <OverView />
+                    <Sections />
+                    <RoutesComponent />
+                    <Stack horizontal>
+                        <PrimaryButton text="Save" type="submit" />
+                        <DefaultButton text="Validate" onClick={handleValidator} />
+                    </Stack>
+                </form>
+            </FormProvider>
+        </ReportWrapper>
+    );
+};

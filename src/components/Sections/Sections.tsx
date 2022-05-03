@@ -13,11 +13,14 @@ interface SectionsProps {
 const addIcon: IIconProps = { iconName: 'Add' };
 
 export const Sections: FC<SectionsProps> = (props) => {
-    const { control, formState: { errors } } = useFormContext<ReportModel>();
+    const {
+        control,
+        formState: { errors },
+    } = useFormContext<ReportModel>();
 
     const { fields: sections, append: appendSection } = useFieldArray({
         name: 'sections',
-        control: control
+        control: control,
     });
 
     useEffect(() => {
@@ -25,11 +28,18 @@ export const Sections: FC<SectionsProps> = (props) => {
     });
 
     const handleAddNewSection = () => {
-        appendSection(new SectionModel({ name: `Section ${sections.length + 1}`, fields: [] }))
-    }
+        appendSection(
+            new SectionModel({
+                name: `Section ${sections.length + 1}`,
+                fields: [],
+            })
+        );
+    };
 
-    const customRenderer = (link?: IPivotItemProps, defaultRenderer?: (link?: IPivotItemProps) => JSX.Element | null,) => {
-
+    const customRenderer = (
+        link?: IPivotItemProps,
+        defaultRenderer?: (link?: IPivotItemProps) => JSX.Element | null
+    ) => {
         if (!link || !defaultRenderer) {
             return null;
         }
@@ -49,22 +59,22 @@ export const Sections: FC<SectionsProps> = (props) => {
                 {icon && <Icon iconName={icon} style={{ color: color }} />}
             </span>
         );
-    }
+    };
 
-    return <Wrapper>
-        <Stack horizontalAlign='space-between' horizontal verticalAlign='center'>
-            <SectionHeader>Sections</SectionHeader>
-            <ActionButton iconProps={addIcon} text='Add new section' onClick={handleAddNewSection} />
-        </Stack>
+    return (
+        <Wrapper>
+            <Stack horizontalAlign="space-between" horizontal verticalAlign="center">
+                <SectionHeader>Sections</SectionHeader>
+                <ActionButton iconProps={addIcon} text="Add new section" onClick={handleAddNewSection} />
+            </Stack>
 
-        <Pivot>
-            {
-                sections.map((section: SectionModel, index) => (
+            <Pivot>
+                {sections.map((section: SectionModel, index) => (
                     <PivotItem headerText={section.name} key={section.id} onRenderItemLink={customRenderer}>
                         <Section index={index} />
                     </PivotItem>
-                ))
-            }
-        </Pivot>
-    </Wrapper>
-}
+                ))}
+            </Pivot>
+        </Wrapper>
+    );
+};

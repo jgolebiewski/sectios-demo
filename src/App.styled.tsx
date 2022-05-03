@@ -1,5 +1,4 @@
-import styled from "styled-components";
-
+import styled from 'styled-components';
 
 export const AppWrapper = styled.section`
     width: 100%;
@@ -9,4 +8,4 @@ export const AppWrapper = styled.section`
     background-color: #e9e9e9;
     display: flex;
     flex-direction: column;
-`
+`;

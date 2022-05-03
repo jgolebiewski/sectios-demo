@@ -5,24 +5,22 @@ import { AppWrapper } from './App.styled';
 import { ThemeProvider, initializeIcons, setIconOptions } from '@fluentui/react';
 
 const reportModel = new ReportModel();
-reportModel.name = "Some Report";
-
+reportModel.name = 'Some Report';
 
 function App() {
-  initializeIcons();
-  setIconOptions({
-    disableWarnings: true,
+    initializeIcons();
+    setIconOptions({
+        disableWarnings: true,
+    });
+    const [report] = useState(reportModel);
 
-  })
-  const [report] = useState(reportModel);
-
-  return (
-    <ThemeProvider>
-      <AppWrapper>
-        <Report report={report} />
-      </AppWrapper>
-    </ThemeProvider>
-  );
+    return (
+        <ThemeProvider>
+            <AppWrapper>
+                <Report report={report} />
+            </AppWrapper>
+        </ThemeProvider>
+    );
 }
 
 export default App;
