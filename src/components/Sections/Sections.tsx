@@ -38,7 +38,7 @@ export const Sections: FC<SectionsProps> = (props) => {
 
     const customRenderer = (
         link?: IPivotItemProps,
-        defaultRenderer?: (link?: IPivotItemProps) => JSX.Element | null
+        defaultRenderer?: (item?: IPivotItemProps) => JSX.Element | null
     ) => {
         if (!link || !defaultRenderer) {
             return null;

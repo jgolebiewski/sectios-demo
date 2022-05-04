@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { SectionWrapper } from './Section.styled';
+import { FieldWrapper, SectionWrapper } from './Section.styled';
 import { ActionButton, IIconProps } from '@fluentui/react';
 import { SectionFieldModel } from './../../domain/SectionFieldModel';
-import { useFieldArray, useFormContext } from 'react-hook-form';
+import { useFieldArray, useFormContext, Control } from 'react-hook-form';
 import { ReportModel } from '../../domain/ReportModel';
 import { CustomTextField } from '../../common/CustomTextField/CustomTextField';
+import { RemoveButton } from '../../common/RemoveButton/RemoveButton';
 
 const addIcon: IIconProps = { iconName: 'Add' };
 
@@ -14,7 +15,11 @@ export const Section: React.FunctionComponent<{ index: number }> = ({ index }) =
         formState: { errors },
     } = useFormContext<ReportModel>();
 
-    const { fields: sectionFields, append } = useFieldArray({
+    const {
+        fields: sectionFields,
+        append,
+        remove,
+    } = useFieldArray({
         name: `sections.${index}.fields`,
         control,
     });
@@ -37,11 +42,23 @@ export const Section: React.FunctionComponent<{ index: number }> = ({ index }) =
         return msg;
     };
 
+    const removeFieldHandler = (idx: number) => {
+        console.log(idx);
+        remove(idx);
+    };
+
     return (
         <SectionWrapper>
             {sectionFields.map((item, i) => (
                 <div key={i}>
-                    <CustomTextField name={`sections.${index}.fields.${i}.value`} control={control} label={item.name} />
+                    <FieldWrapper>
+                        <RemoveButton handleRemove={() => removeFieldHandler(i)} />
+                        <CustomTextField
+                            name={`sections.${index}.fields.${i}.value`}
+                            control={control}
+                            label={item.name}
+                        />
+                    </FieldWrapper>
                     {errors && <p className="required"> {getErrorMessage(i)}</p>}
                 </div>
             ))}
