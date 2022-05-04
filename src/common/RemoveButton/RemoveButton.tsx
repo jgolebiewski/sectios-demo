@@ -12,6 +12,6 @@ const RemoveButtonStyled = styled(ActionButton)`
 `;
 
 export const RemoveButton = (props: ButtonProps): JSX.Element => {
-    const removeIcon: IIconProps = { iconName: 'Remove' };
-    return <RemoveButtonStyled iconProps={removeIcon} text="Remove field" onClick={props.handleRemove} />;
+    const removeIcon: IIconProps = { iconName: 'Delete' };
+    return <RemoveButtonStyled iconProps={removeIcon} text="" onClick={props.handleRemove} />;
 };

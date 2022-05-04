@@ -1,6 +1,7 @@
 import { ActionButton, Icon, IIconProps, IPivotItemProps, Pivot, PivotItem, Stack } from '@fluentui/react';
 import { FC, useEffect } from 'react';
 import { useFormContext, useFieldArray } from 'react-hook-form';
+import { RemoveButton } from '../../common/RemoveButton/RemoveButton';
 import { Wrapper } from '../../common/Wrapper/Wrapper.styled';
 import { ReportModel } from '../../domain/ReportModel';
 import { SectionModel } from '../../domain/SectionModel';
@@ -18,7 +19,11 @@ export const Sections: FC<SectionsProps> = (props) => {
         formState: { errors },
     } = useFormContext<ReportModel>();
 
-    const { fields: sections, append: appendSection } = useFieldArray({
+    const {
+        fields: sections,
+        append: appendSection,
+        remove: removeSection,
+    } = useFieldArray({
         name: 'sections',
         control: control,
     });
@@ -34,6 +39,10 @@ export const Sections: FC<SectionsProps> = (props) => {
                 fields: [],
             })
         );
+    };
+
+    const handleRemoveSection = (idx: number) => {
+        removeSection(idx);
     };
 
     const customRenderer = (
@@ -55,6 +64,7 @@ export const Sections: FC<SectionsProps> = (props) => {
 
         return (
             <span style={{ flex: '0 1 100%' }}>
+                {itemKey && <Icon iconName="Delete" onClick={() => handleRemoveSection(+itemKey)} />}
                 {defaultRenderer({ ...link })}
                 {icon && <Icon iconName={icon} style={{ color: color }} />}
             </span>
