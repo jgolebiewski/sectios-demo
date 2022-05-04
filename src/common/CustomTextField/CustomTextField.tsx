@@ -8,8 +8,9 @@ const removeIcon: IIconProps = { iconName: 'Remove' };
 export const CustomTextField: FC<CustomFieldProps> = (props): JSX.Element => {
     const { name, label, control, disabled } = props;
 
-    const handleRemove = (d) => {
+    const handleRemove = (d: string) => {
         console.log('remove dee');
+        const d = 123;
     };
 
     return (
