@@ -1,0 +1,5 @@
+{
+    "name": "@reports/report",
+    "version": "1.0",
+    "main": "./index.ts"
+}

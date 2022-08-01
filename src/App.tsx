@@ -1,23 +1,26 @@
-import React, { useState } from 'react';
-import { Report } from './components/Report/Report';
-import { ReportModel } from './domain/ReportModel';
 import { AppWrapper } from './App.styled';
 import { ThemeProvider, initializeIcons, setIconOptions } from '@fluentui/react';
-
-const reportModel = new ReportModel();
-reportModel.name = 'Some awesome Report';
+import { ReportPage } from './pages/report/ReportPage';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { MainPage } from './pages/main/MainPage';
+import { ReportCreatorPage } from './pages/report-creator/ReportCreatorPage';
 
 function App() {
     initializeIcons();
     setIconOptions({
         disableWarnings: true,
     });
-    const [report] = useState(reportModel);
 
     return (
         <ThemeProvider>
             <AppWrapper>
-                <Report report={report} />
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<MainPage />} />
+                        <Route path="/report-creator" element={<ReportCreatorPage />} />
+                        <Route path="/report" element={<ReportPage />} />
+                    </Routes>
+                </BrowserRouter>
             </AppWrapper>
         </ThemeProvider>
     );

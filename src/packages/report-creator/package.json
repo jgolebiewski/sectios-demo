@@ -1,0 +1,5 @@
+{
+    "name": "@reports/report-creator",
+    "version": "1.0",
+    "main": "./index.ts"
+}
