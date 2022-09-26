@@ -6,4 +6,5 @@ export interface CustomFieldProps {
     label: string;
     disabled?: boolean;
     control: Control<any, object>;
+    isRequired?: boolean;
 }
