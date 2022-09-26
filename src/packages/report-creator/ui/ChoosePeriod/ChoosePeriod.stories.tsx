@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentStory, Meta } from '@storybook/react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ChoosePeriod } from './ChoosePeriod';

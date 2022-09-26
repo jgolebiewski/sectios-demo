@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CustomDatePicker } from '@reports/ui';
 import { Meta, ComponentStory } from '@storybook/react';
