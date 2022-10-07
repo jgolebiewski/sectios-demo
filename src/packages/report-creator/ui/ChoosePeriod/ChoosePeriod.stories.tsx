@@ -15,8 +15,9 @@ export const _ChoosePeriod: ComponentStory<typeof ChoosePeriod> = (args: any) =>
     const methods = useForm({
         resolver: yupResolver(reportCreatorSchema),
         defaultValues: {
-            from: '',
-            to: '',
+            countries: ['a'],
+            // from: null,
+            // to: null,
         },
     });
 

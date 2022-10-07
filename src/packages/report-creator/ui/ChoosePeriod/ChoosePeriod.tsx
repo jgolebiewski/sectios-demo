@@ -1,4 +1,5 @@
 import { CustomDatePicker } from '@reports/ui';
+import { FormError } from '@reports/ui/FormError/FormError';
 import moment from 'moment';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { ChoosePeriodWrapper } from './ChoosePeriod.styled';
@@ -31,9 +32,7 @@ export const ChoosePeriod = (): JSX.Element => {
                         isRequired={true}
                         maxDate={new Date()}
                     />
-                    <small>
-                        <em>{errors && errors.from?.message}</em>
-                    </small>
+                    <FormError>{(errors && errors.from?.message) || ''}</FormError>
                 </div>
                 <div>
                     <CustomDatePicker
@@ -44,9 +43,7 @@ export const ChoosePeriod = (): JSX.Element => {
                         isRequired={true}
                         minDate={new Date(startDate || '')}
                     />
-                    <small>
-                        <em>{errors && errors.to?.message}</em>
-                    </small>
+                    <FormError>{(errors && errors.to?.message) || ''}</FormError>
                 </div>
             </ChoosePeriodWrapper>
 

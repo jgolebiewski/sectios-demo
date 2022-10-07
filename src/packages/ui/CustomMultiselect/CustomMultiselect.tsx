@@ -8,7 +8,7 @@ interface CustomDropdownProps {
     options: IDropdownOption[];
 }
 
-export const CustomDropdown: FC<CustomFieldProps & CustomDropdownProps> = ({
+export const CustomMultiselect: FC<CustomFieldProps & CustomDropdownProps> = ({
     name,
     label,
     control,
@@ -26,10 +26,21 @@ export const CustomDropdown: FC<CustomFieldProps & CustomDropdownProps> = ({
                         {...field}
                         placeholder={placeholder ? placeholder : 'Select an option'}
                         label={label}
-                        selectedKey={field.value}
+                        selectedKeys={field.value}
+                        multiSelect
                         options={options}
-                        onChange={(event: FormEvent<HTMLDivElement>, item: IDropdownOption | undefined) => {
-                            field.onChange(item?.key);
+                        disabled={disabled}
+                        onChange={(_event: FormEvent<HTMLDivElement>, item: IDropdownOption | undefined) => {
+                            let values: string[] = field.value || [];
+
+                            if (item) {
+                                if (item.selected) {
+                                    values.push(item.key.toString());
+                                } else {
+                                    values = values.filter((v: string) => v !== item.key.toString());
+                                }
+                            }
+                            field.onChange(values);
                         }}
                     />
                 )}
