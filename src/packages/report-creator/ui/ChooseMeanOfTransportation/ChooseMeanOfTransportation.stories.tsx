@@ -18,7 +18,7 @@ export const _ChooseMeanOfTransportation: ComponentStory<typeof ChooseMeanOfTran
             countries: ['PL'],
             from: new Date(),
             to: new Date(),
-            meansOfTransport: [],
+            meansOfTransport: ['1'],
         },
     });
 
