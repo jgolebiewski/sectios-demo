@@ -2,7 +2,7 @@ import { DatePicker, defaultDatePickerStrings } from '@fluentui/react';
 import { CustomFieldProps } from '../CustomFieldProps';
 import { FC } from 'react';
 import { Controller } from 'react-hook-form';
-import { DEFUALT_DATE_FORMAT } from '../../../core/defaults';
+import { DEFAULT_DATE_FORMAT } from '../../../core/defaults';
 import moment from 'moment';
 
 interface DatePickerProps {
@@ -31,7 +31,7 @@ export const CustomDatePicker: FC<CustomFieldProps & DatePickerProps> = ({
                         onSelectDate={(date: Date | null | undefined) => {
                             field.onChange(date ? date.toISOString() : null);
                         }}
-                        formatDate={(date?: Date) => moment(date).format(DEFUALT_DATE_FORMAT)}
+                        formatDate={(date?: Date) => moment(date).format(DEFAULT_DATE_FORMAT)}
                         placeholder="Select a date..."
                         label={label}
                         strings={defaultDatePickerStrings}

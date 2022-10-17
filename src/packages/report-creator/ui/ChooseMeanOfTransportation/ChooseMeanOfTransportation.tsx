@@ -1,8 +1,10 @@
 import { IDropdownOption } from '@fluentui/react';
 import { CheckboxGroup } from '@reports/ui/CheckboxGroup/CheckboxGroup';
 import { FormError } from '@reports/ui/FormError/FormError';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { MeansOfTransports } from '../../types';
+import { DataService } from '../../../../core/services/DataService';
+import { MeanOfTransport } from '../../../../core/types';
 import { ChooseMeanOfTransportationWrapper } from './ChooseMeanOfTransportation.styled';
 
 export const ChooseMeanOfTransportation = (): JSX.Element => {
@@ -13,12 +15,14 @@ export const ChooseMeanOfTransportation = (): JSX.Element => {
         formState: { errors },
     } = useFormContext<{ meansOfTransport: any[] }>();
 
-    const means: IDropdownOption[] = [
-        { key: MeansOfTransports.Airplane.toString(), text: 'Airplane' },
-        { key: MeansOfTransports.Car.toString(), text: 'Car' },
-        { key: MeansOfTransports.Ferry.toString(), text: 'Ferry' },
-        { key: MeansOfTransports.Train.toString(), text: 'Train' },
-    ];
+    const [means, setMeans] = useState<MeanOfTransport[]>([]);
+
+    useEffect(() => {
+        (async () => {
+            const response = await DataService.getMeansOfTransport();
+            setMeans(response.data);
+        })();
+    }, []);
 
     return (
         <ChooseMeanOfTransportationWrapper>
