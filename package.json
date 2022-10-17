@@ -35,12 +35,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint .",
+    "lint": "eslint . --ignore-pattern api/*.js",
     "lint:fix": "eslint --fix .",
     "prepare": "husky install",
     "check:circular-deps": "madge --warning --circular --extensions ts,tsx src",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "api": "json-server api/index.js --port 3004 --routes api/routes.json"
   },
   "eslintConfig": {
     "extends": [

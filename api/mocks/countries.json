@@ -1,0 +1,12 @@
+{
+    "countries": [
+        {
+            "key": "PL",
+            "text": "Poland"
+        },
+        {
+            "key": "DE",
+            "text": "Germany"
+        }
+    ]
+}
