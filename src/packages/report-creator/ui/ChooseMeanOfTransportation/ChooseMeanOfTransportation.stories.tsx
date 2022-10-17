@@ -3,7 +3,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ComponentStory, Meta } from '@storybook/react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { reportCreatorSchema } from '../../schemas/validation-schema';
-import { ChoosePeriod } from '../ChoosePeriod/ChoosePeriod';
 import { ChooseMeanOfTransportation } from './ChooseMeanOfTransportation';
 
 export default {
