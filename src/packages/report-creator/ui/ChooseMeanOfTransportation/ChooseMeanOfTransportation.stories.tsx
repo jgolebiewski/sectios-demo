@@ -10,6 +10,7 @@ export default {
     component: ChooseMeanOfTransportation,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const _ChooseMeanOfTransportation: ComponentStory<typeof ChooseMeanOfTransportation> = (args: any) => {
     const methods = useForm({
         resolver: yupResolver(reportCreatorSchema),

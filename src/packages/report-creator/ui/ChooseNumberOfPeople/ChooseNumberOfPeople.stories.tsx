@@ -9,6 +9,7 @@ export default {
     template: ChooseNumberOfPeople,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const _ChooseNumberOfPeople: ComponentStory<typeof ChooseNumberOfPeople> = (args: any) => {
     const methods = useForm({
         resolver: yupResolver(reportCreatorSchema),

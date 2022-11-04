@@ -11,6 +11,7 @@ export default {
     template: ChooseCountry,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const _ChooseCountry: ComponentStory<typeof ChooseCountry> = (args: any) => {
     const methods = useForm({
         resolver: yupResolver(reportCreatorSchema),
@@ -28,7 +29,7 @@ export const _ChooseCountry: ComponentStory<typeof ChooseCountry> = (args: any) 
 
     return (
         <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit((data: any) => console.log('submit', data))}>
+            <form onSubmit={methods.handleSubmit((data) => console.log('submit', data))}>
                 <ChooseCountry />
                 <PrimaryButton type="button" onClick={handleClick}>
                     Submit

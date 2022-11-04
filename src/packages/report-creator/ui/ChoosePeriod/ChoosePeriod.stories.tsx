@@ -11,6 +11,7 @@ export default {
     component: ChoosePeriod,
 } as Meta;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const _ChoosePeriod: ComponentStory<typeof ChoosePeriod> = (args: any) => {
     const methods = useForm({
         resolver: yupResolver(reportCreatorSchema),
