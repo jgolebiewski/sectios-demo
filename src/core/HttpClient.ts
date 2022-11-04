@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getBaseUrl = () => {
-    return process.env.API;
+    return process.env.REACT_APP_API;
 };
 
 export const HttpClient = {

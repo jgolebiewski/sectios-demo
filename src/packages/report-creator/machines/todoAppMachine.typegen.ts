@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/ban-types */
 // This file was automatically generated. Edits will be overwritten
 
 export interface Typegen0 {
@@ -50,18 +48,18 @@ export interface Typegen0 {
     };
     eventsCausingActions: {
         assignErrorToContext:
-        | 'error.platform.Todo machine.Creating a new todo.Saving todo:invocation[0]'
-        | 'error.platform.Todo machine.Deleting todo:invocation[0]'
-        | 'error.platform.Todo machine.Loading Todos:invocation[0]';
+            | 'error.platform.Todo machine.Creating a new todo.Saving todo:invocation[0]'
+            | 'error.platform.Todo machine.Deleting todo:invocation[0]'
+            | 'error.platform.Todo machine.Loading Todos:invocation[0]';
         assignFormInputToContext: 'Form input changed';
         assignTodosToContext: 'done.invoke.Todo machine.Loading Todos:invocation[0]';
     };
     eventsCausingServices: {
         deleteTodo: 'Delete';
         loadTodos:
-        | 'done.invoke.Todo machine.Creating a new todo.Saving todo:invocation[0]'
-        | 'done.invoke.Todo machine.Deleting todo:invocation[0]'
-        | 'xstate.init';
+            | 'done.invoke.Todo machine.Creating a new todo.Saving todo:invocation[0]'
+            | 'done.invoke.Todo machine.Deleting todo:invocation[0]'
+            | 'xstate.init';
         saveTodo: 'Submit';
     };
     eventsCausingGuards: {
@@ -69,14 +67,14 @@ export interface Typegen0 {
     };
     eventsCausingDelays: {};
     matchesStates:
-    | 'Creating a new todo'
-    | 'Creating a new todo.Saving todo'
-    | 'Creating a new todo.Showing from input'
-    | 'Deleting todo'
-    | 'Deleting todo errored'
-    | 'Loading Todos'
-    | 'Loading todos errored'
-    | 'Todos Loaded'
-    | { 'Creating a new todo'?: 'Saving todo' | 'Showing from input' };
+        | 'Creating a new todo'
+        | 'Creating a new todo.Saving todo'
+        | 'Creating a new todo.Showing from input'
+        | 'Deleting todo'
+        | 'Deleting todo errored'
+        | 'Loading Todos'
+        | 'Loading todos errored'
+        | 'Todos Loaded'
+        | { 'Creating a new todo'?: 'Saving todo' | 'Showing from input' };
     tags: never;
 }

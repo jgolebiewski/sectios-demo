@@ -6,4 +6,4 @@ export default {
     component: Greetings,
 } as Meta;
 
-export const _Greetings: ComponentStory<typeof Greetings> = () => <Greetings />;
+export const _Greetings: ComponentStory<typeof Greetings> = () => <Greetings handleStart={() => console.log} />;

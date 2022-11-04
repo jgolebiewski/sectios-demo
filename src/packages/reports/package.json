@@ -1,0 +1,5 @@
+{
+    "name": "@reports/reports",
+    "version": "1.0",
+    "main": "./indext.ts"
+}

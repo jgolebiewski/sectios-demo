@@ -2,9 +2,13 @@ import { CustomDatePicker } from '@reports/ui';
 import { FormError } from '@reports/ui/FormError/FormError';
 import moment from 'moment';
 import { useFormContext, useWatch } from 'react-hook-form';
+import { Report } from '../../machines/reportCreator.machine';
 import { ChoosePeriodWrapper } from './ChoosePeriod.styled';
 
 const calculateDuration = (start: string | null, end: string | null): string => {
+    if (!start || !end) {
+        return '';
+    }
     const endDateMoment = moment(end);
     const startDateMoment = moment(start);
     return moment.duration(endDateMoment.diff(startDateMoment)).humanize();
@@ -14,7 +18,7 @@ export const ChoosePeriod = (): JSX.Element => {
     const {
         control,
         formState: { errors },
-    } = useFormContext<{ from: string | null; to: string | null }>();
+    } = useFormContext<Report>();
 
     const startDate = useWatch({ control, name: `from` });
     const endDate = useWatch({ control, name: `to` });
@@ -47,7 +51,7 @@ export const ChoosePeriod = (): JSX.Element => {
                 </div>
             </ChoosePeriodWrapper>
 
-            <pre>{duration}</pre>
+            {duration && <h5>Duration: {duration}</h5>}
         </>
     );
 };

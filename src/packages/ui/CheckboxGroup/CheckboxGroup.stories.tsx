@@ -1,6 +1,5 @@
 import { ComponentStory } from '@storybook/react';
 import { useForm, FormProvider } from 'react-hook-form';
-import { CustomDatePicker } from '../CustomDatePicker/CustomDatePicker';
 import { CheckboxGroup } from './CheckboxGroup';
 
 export default {

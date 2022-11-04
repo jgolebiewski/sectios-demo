@@ -1,94 +1,98 @@
 import { useMachine } from '@xstate/react';
 import { todoMachine } from '../machines/todoAppMachine';
 import { Greetings } from './Greetings/Greetings';
-
-const todos = new Set<string>();
+import { Report, ReportContext, reportCreateMachine } from '../machines/reportCreator.machine';
+import { reportCreatorSchema } from '../schemas/validation-schema';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { FormProvider, useForm } from 'react-hook-form';
+import { ChooseCountry } from './ChooseCountry/ChooseCountry';
+import { ChooseMeanOfTransportation } from './ChooseMeanOfTransportation/ChooseMeanOfTransportation';
+import { ChoosePeriod } from './ChoosePeriod/ChoosePeriod';
+import { Ending } from './Ending/Ending';
+import { ChooseNumberOfPeople } from './ChooseNumberOfPeople/ChooseNumberOfPeople';
+import { DefaultButton, PrimaryButton } from '@fluentui/react';
+import { ButtonsWrapper, CreatorWrapper } from './ReportCreator.styled';
+import { useEffect } from 'react';
+import { ReportSummary } from './ReportSummary/ReportSummary';
+import { ReportCreatorService } from '../services/ReportCreatorService';
 
 export const ReportCreator = (): JSX.Element => {
-    // const [state, send] = useMachine(todoMachine, {
-    //     services: {
-    //         loadTodos: async () => {
-    //             return Array.from(todos);
-    //         },
-    //         saveTodo: async (context, _event) => {
-    //             todos.add(context.createNewTodoFormInput);
-    //         },
-    //         deleteTodo: async (context, event) => {
-    //             // throw Error('Deleting failed');
-    //             todos.delete(event.todo);
-    //         },
-    //     },
-    // });
+    const [state, send] = useMachine(reportCreateMachine, {
+        services: {
+            saveReport: async (context, _event) => {
+                console.log('save report', context, _event);
+                return ReportCreatorService.saveReport(context.data);
+            },
+            loadCountries: async () => {
+                console.log('loadCountries');
+            },
+        },
+    });
+
+    const methods = useForm<Report>({
+        resolver: yupResolver(reportCreatorSchema),
+        mode: 'onChange',
+        reValidateMode: 'onChange',
+        defaultValues: state.context.data,
+    });
+
+    const handlePreviousState = () => {
+        send('Prev');
+    };
+
+    const handleNextState = () => {
+        console.log(state.event);
+        const data: Report = methods.getValues();
+        const ctx: ReportContext = {
+            data,
+            formErrors: methods.formState.errors,
+        };
+        send({ type: 'FormChange', value: ctx });
+        send('Next');
+    };
+
+    const showPrevNext = () => {
+        return (
+            !state.matches('Welcome') &&
+            !state.matches('Finish') &&
+            !state.matches('End Report') &&
+            !state.matches('Summary')
+        );
+    };
+    useEffect(() => {
+        methods.trigger();
+    }, [state]);
 
     return (
-        <div>
+        <CreatorWrapper>
             <h1>Report Creator</h1>
+            <FormProvider {...methods}>
+                <form>
+                    {state.matches('Welcome') && <Greetings handleStart={() => send('Start')} />}
+                    {state.matches('Choose Period') && <ChoosePeriod />}
+                    {state.matches('Choose number of people') && <ChooseNumberOfPeople />}
+                    {state.matches('Choose Country') && <ChooseCountry />}
+                    {state.matches('Choose Means of transports') && <ChooseMeanOfTransportation />}
+                    {state.matches('Finish') && <Ending />}
+                    {state.matches('End Report') && <Ending />}
 
-            {/* <pre>{JSON.stringify(state.value)}</pre>
-            <pre>{JSON.stringify(state.context)}</pre>
-            {state.matches('Deleting todo errored') && (
-                <>
-                    <p>Something went wrong: {state.context.errorMessage}</p>
-                    <button
-                        onClick={() => {
-                            send({ type: 'Speed up' });
-                        }}
-                    >
-                        Go back
-                    </button>
-                </>
-            )} */}
-
-            {/* {state.matches('Todos Loaded') && (
-                <>
-                    <h5>Loaded</h5>
-                    <ul>
-                        {state.context.todos.map((v, i) => (
-                            <li key={i}>
-                                {v}
-                                <button
-                                    onClick={() => {
-                                        send({
-                                            type: 'Delete',
-                                            todo: v,
-                                        });
-                                    }}
-                                >
-                                    Del
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                    <button
-                        onClick={() => {
-                            send({ type: 'Create new' });
-                        }}
-                    >
-                        Create a new
-                    </button>
-                </>
-            )}
-            {state.matches('Creating a new todo.Showing from input') && (
-                <form
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        send({
-                            type: 'Submit',
-                        });
-                    }}
-                >
-                    <input
-                        onChange={(e) => {
-                            send({
-                                type: 'Form input changed',
-                                value: e.target.value,
-                            });
-                        }}
-                    />
-                    <button type="submit">Save</button>
+                    {showPrevNext() && (
+                        <ButtonsWrapper>
+                            <DefaultButton onClick={handlePreviousState}>Previous</DefaultButton>
+                            <DefaultButton onClick={handleNextState}>Next</DefaultButton>
+                        </ButtonsWrapper>
+                    )}
+                    {state.matches('Summary') && (
+                        <>
+                            <ReportSummary report={state.context.data} />
+                            <ButtonsWrapper>
+                                <DefaultButton onClick={handlePreviousState}>Previous</DefaultButton>
+                                <PrimaryButton onClick={() => send('Finish')}>Finish</PrimaryButton>
+                            </ButtonsWrapper>
+                        </>
+                    )}
                 </form>
-            )} */}
-            <Greetings />
-        </div>
+            </FormProvider>
+        </CreatorWrapper>
     );
 };
