@@ -1,6 +1,6 @@
 import { Link } from '@fluentui/react';
 import { MainPageWrapper } from './MainPage.styled';
-import { ReportsList } from '../../packages/reports/ui/ReportsList/ReportsList';
+import { ReportsList } from '@reports/reports';
 
 export const MainPage = (): JSX.Element => {
     return (
