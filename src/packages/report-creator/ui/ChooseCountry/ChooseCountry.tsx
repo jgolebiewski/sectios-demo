@@ -1,13 +1,13 @@
 import { CountrySelector } from '@reports/ui/CountrySelector/CountrySelector';
 import { FormError } from '@reports/ui/FormError/FormError';
 import { useFormContext } from 'react-hook-form';
-import { Report } from '../../machines/reportCreator.machine';
+import { DraftReport } from '../../machines/reportCreator.machine';
 
 export const ChooseCountry = (): JSX.Element => {
     const {
         control,
         formState: { errors },
-    } = useFormContext<Report>();
+    } = useFormContext<DraftReport>();
 
     return (
         <section className="mb-10">

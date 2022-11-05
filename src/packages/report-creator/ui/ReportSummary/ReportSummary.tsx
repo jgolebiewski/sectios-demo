@@ -1,4 +1,4 @@
-import { Report } from '../../machines/reportCreator.machine';
+import { DraftReport } from '../../machines/reportCreator.machine';
 import { DEFAULT_DATE_FORMAT } from '../../../../core/defaults';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
@@ -6,7 +6,7 @@ import { Country, MeanOfTransport } from '../../../../core/types';
 import { DataService } from '../../../../core/services/DataService';
 import { SummaryLabel } from './ReportSummary.styled';
 
-export const ReportSummary = ({ report }: { report: Report }): JSX.Element => {
+export const ReportSummary = ({ report }: { report: DraftReport }): JSX.Element => {
     const fields = Object.keys(report) as Array<keyof typeof report>;
     const [countries, setCountries] = useState<Country[]>([]);
     const [means, setMeans] = useState<MeanOfTransport[]>([]);

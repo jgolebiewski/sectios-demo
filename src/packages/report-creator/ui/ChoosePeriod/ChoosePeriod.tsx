@@ -2,7 +2,7 @@ import { CustomDatePicker } from '@reports/ui';
 import { FormError } from '@reports/ui/FormError/FormError';
 import moment from 'moment';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { Report } from '../../machines/reportCreator.machine';
+import { DraftReport } from '../../machines/reportCreator.machine';
 import { ChoosePeriodWrapper } from './ChoosePeriod.styled';
 
 const calculateDuration = (start: string | null, end: string | null): string => {
@@ -18,7 +18,7 @@ export const ChoosePeriod = (): JSX.Element => {
     const {
         control,
         formState: { errors },
-    } = useFormContext<Report>();
+    } = useFormContext<DraftReport>();
 
     const startDate = useWatch({ control, name: `from` });
     const endDate = useWatch({ control, name: `to` });

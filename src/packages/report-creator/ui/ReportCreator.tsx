@@ -1,7 +1,6 @@
 import { useMachine } from '@xstate/react';
-import { todoMachine } from '../machines/todoAppMachine';
 import { Greetings } from './Greetings/Greetings';
-import { Report, ReportContext, reportCreateMachine } from '../machines/reportCreator.machine';
+import { DraftReport, DraftReportContext, reportCreateMachine } from '../machines/reportCreator.machine';
 import { reportCreatorSchema } from '../schemas/validation-schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -20,16 +19,12 @@ export const ReportCreator = (): JSX.Element => {
     const [state, send] = useMachine(reportCreateMachine, {
         services: {
             saveReport: async (context, _event) => {
-                console.log('save report', context, _event);
                 return ReportCreatorService.saveReport(context.data);
-            },
-            loadCountries: async () => {
-                console.log('loadCountries');
             },
         },
     });
 
-    const methods = useForm<Report>({
+    const methods = useForm<DraftReport>({
         resolver: yupResolver(reportCreatorSchema),
         mode: 'onChange',
         reValidateMode: 'onChange',
@@ -37,26 +32,26 @@ export const ReportCreator = (): JSX.Element => {
     });
 
     const handlePreviousState = () => {
-        send('Prev');
+        send('PREV');
     };
 
     const handleNextState = () => {
         console.log(state.event);
-        const data: Report = methods.getValues();
-        const ctx: ReportContext = {
+        const data: DraftReport = methods.getValues();
+        const ctx: DraftReportContext = {
             data,
             formErrors: methods.formState.errors,
         };
-        send({ type: 'FormChange', value: ctx });
-        send('Next');
+        send({ type: 'FORM_CHANGE', value: ctx });
+        send('NEXT');
     };
 
     const showPrevNext = () => {
         return (
-            !state.matches('Welcome') &&
-            !state.matches('Finish') &&
-            !state.matches('End Report') &&
-            !state.matches('Summary')
+            !state.matches('WELCOME') &&
+            !state.matches('FINISH') &&
+            !state.matches('END_REPORT') &&
+            !state.matches('SUMMARY')
         );
     };
     useEffect(() => {
@@ -68,13 +63,13 @@ export const ReportCreator = (): JSX.Element => {
             <h1>Report Creator</h1>
             <FormProvider {...methods}>
                 <form>
-                    {state.matches('Welcome') && <Greetings handleStart={() => send('Start')} />}
-                    {state.matches('Choose Period') && <ChoosePeriod />}
-                    {state.matches('Choose number of people') && <ChooseNumberOfPeople />}
-                    {state.matches('Choose Country') && <ChooseCountry />}
-                    {state.matches('Choose Means of transports') && <ChooseMeanOfTransportation />}
-                    {state.matches('Finish') && <Ending />}
-                    {state.matches('End Report') && <Ending />}
+                    {state.matches('WELCOME') && <Greetings handleStart={() => send('START')} />}
+                    {state.matches('CHOOSE_PERIOD') && <ChoosePeriod />}
+                    {state.matches('CHOOSE_NUMBER_OF_PEOPLE') && <ChooseNumberOfPeople />}
+                    {state.matches('CHOOSE_COUNTRY') && <ChooseCountry />}
+                    {state.matches('CHOOSE_MEANS_OF_TRANSPORT') && <ChooseMeanOfTransportation />}
+                    {state.matches('FINISH') && <Ending />}
+                    {state.matches('END_REPORT') && <Ending />}
 
                     {showPrevNext() && (
                         <ButtonsWrapper>
@@ -87,7 +82,7 @@ export const ReportCreator = (): JSX.Element => {
                             <ReportSummary report={state.context.data} />
                             <ButtonsWrapper>
                                 <DefaultButton onClick={handlePreviousState}>Previous</DefaultButton>
-                                <PrimaryButton onClick={() => send('Finish')}>Finish</PrimaryButton>
+                                <PrimaryButton onClick={() => send('FINISH')}>Finish</PrimaryButton>
                             </ButtonsWrapper>
                         </>
                     )}

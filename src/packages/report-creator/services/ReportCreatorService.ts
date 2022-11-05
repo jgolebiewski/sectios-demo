@@ -1,7 +1,7 @@
 import { HttpClient, getBaseUrl } from '../../../core/HttpClient';
-import { Report } from '../machines/reportCreator.machine';
+import { DraftReport } from '../machines/reportCreator.machine';
 
-const saveReport = (report: Report) => {
+const saveReport = (report: DraftReport) => {
     return HttpClient.post(getBaseUrl() + 'api/reports', report);
 };
 

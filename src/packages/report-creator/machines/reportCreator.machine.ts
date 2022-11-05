@@ -2,18 +2,18 @@ import { FieldErrorsImpl } from 'react-hook-form';
 import { createMachine, assign } from 'xstate';
 import { DateService } from '../../../core/services/DateService';
 
-export interface Report {
+export interface DraftReport {
     from: string;
     to: string;
     numberOfPeople: number | null;
     meansOfTransport: string[];
     countries: string[];
 }
-export type ReportErrors = FieldErrorsImpl<Report>;
+export type DraftReportErrors = FieldErrorsImpl<DraftReport>;
 
-export interface ReportContext {
-    data: Report;
-    formErrors: ReportErrors | null;
+export interface DraftReportContext {
+    data: DraftReport;
+    formErrors: DraftReportErrors | null;
 }
 
 const report = {
@@ -24,7 +24,7 @@ const report = {
     countries: [],
 };
 
-const reportContext: ReportContext = {
+const reportContext: DraftReportContext = {
     data: report,
     formErrors: null,
 };
@@ -36,16 +36,13 @@ export const reportCreateMachine =
             context: reportContext,
             schema: {
                 events: {} as
-                    | { type: 'Start' }
-                    | { type: 'Next' }
-                    | { type: 'Prev' }
-                    | { type: 'Finish' }
-                    | { type: 'FormChange'; value: ReportContext },
+                    | { type: 'START' }
+                    | { type: 'NEXT' }
+                    | { type: 'PREV' }
+                    | { type: 'FINISH' }
+                    | { type: 'FORM_CHANGE'; value: DraftReportContext },
                 services: {} as {
                     saveReport: {
-                        data: void;
-                    };
-                    loadCountries: {
                         data: void;
                     };
                 },
@@ -57,100 +54,100 @@ export const reportCreateMachine =
             states: {
                 Welcome: {
                     on: {
-                        Start: {
-                            target: 'Choose Period',
+                        START: {
+                            target: 'CHOOSE_PERIOD',
                         },
                     },
                 },
-                'Choose Period': {
+                CHOOSE_PERIOD: {
                     on: {
-                        FormChange: {
+                        FORM_CHANGE: {
                             actions: 'assignFormChange',
                         },
-                        Next: [
+                        NEXT: [
                             {
-                                target: 'End Report',
-                                cond: 'Less then 5 days',
+                                target: 'END_REPORT',
+                                cond: 'lessThenFiveDays',
                             },
                             {
-                                target: 'Choose Country',
+                                target: 'CHOOSE_COUNTRY',
                                 cond: 'periodStateIsValid',
                             },
                         ],
                     },
                 },
-                Finish: {
+                FINISH: {
                     type: 'final',
                 },
-                'Choose number of people': {
+                CHOOSE_NUMBER_OF_PEOPLE: {
                     on: {
-                        FormChange: {
+                        FORM_CHANGE: {
                             actions: 'assignFormChange',
                         },
-                        Next: {
+                        NEXT: {
                             target: 'Summary',
                             cond: 'chooseNumberOfPeopleIsValid',
                         },
-                        Prev: {
-                            target: 'Choose Means of transports',
+                        PREV: {
+                            target: 'CHOOSE_MEANS_OF_TRANSPORT',
                         },
                     },
                 },
                 Summary: {
                     on: {
-                        Finish: {
-                            target: 'Saving report',
+                        FINISH: {
+                            target: 'SAVING_REPORT',
                             cond: 'chooseNumberOfPeopleIsValid',
                         },
-                        Prev: {
-                            target: 'Choose number of people',
+                        PREV: {
+                            target: 'CHOOSE_NUMBER_OF_PEOPLE',
                         },
                     },
                 },
-                'Error occurred': {},
-                'End Report': {
+                ERROR_OCCURRED: {},
+                END_REPORT: {
                     type: 'final',
                 },
-                'Saving report': {
+                SAVING_REPORT: {
                     invoke: {
                         src: 'saveReport',
                         onDone: [
                             {
-                                target: 'Finish',
+                                target: 'FINISH',
                                 cond: 'reportIsValid',
                             },
                         ],
                         onError: [
                             {
-                                target: 'Error occurred',
+                                target: 'ERROR_OCCURRED',
                             },
                         ],
                     },
                 },
-                'Choose Country': {
+                CHOOSE_COUNTRY: {
                     on: {
-                        FormChange: {
+                        FORM_CHANGE: {
                             actions: 'assignFormChange',
                         },
-                        Prev: {
-                            target: 'Choose Period',
+                        PREV: {
+                            target: 'CHOOSE_PERIOD',
                         },
-                        Next: {
-                            target: 'Choose Means of transports',
+                        NEXT: {
+                            target: 'CHOOSE_MEANS_OF_TRANSPORT',
                             cond: 'countriesIsValid',
                         },
                     },
                 },
-                'Choose Means of transports': {
+                CHOOSE_MEANS_OF_TRANSPORT: {
                     on: {
-                        FormChange: {
+                        FORM_CHANGE: {
                             actions: 'assignFormChange',
                         },
-                        Prev: {
-                            target: 'Choose Country',
+                        PREV: {
+                            target: 'CHOOSE_COUNTRY',
                         },
-                        Next: {
-                            target: 'Choose number of people',
+                        NEXT: {
+                            target: 'CHOOSE_NUMBER_OF_PEOPLE',
                             cond: 'meansOfTransportIsValid',
                         },
                     },
@@ -159,31 +156,30 @@ export const reportCreateMachine =
         },
         {
             guards: {
-                'Less then 5 days': (context: ReportContext, _events) => {
+                lessThenFiveDays: (context: DraftReportContext, _events) => {
                     const { from, to } = context.data;
                     return DateService.calculateDuration(from, to) <= 5;
                 },
-                periodStateIsValid: (context: ReportContext) => {
+                periodStateIsValid: (context: DraftReportContext) => {
                     const { from, to } = context.formErrors || {};
                     if (from || to) {
                         return false;
                     }
                     return true;
                 },
-                chooseNumberOfPeopleIsValid: ({ formErrors }: ReportContext) => {
+                chooseNumberOfPeopleIsValid: ({ formErrors }: DraftReportContext) => {
                     const { numberOfPeople } = formErrors || {};
                     return numberOfPeople ? false : true;
                 },
-                meansOfTransportIsValid: ({ formErrors }: ReportContext) => {
+                meansOfTransportIsValid: ({ formErrors }: DraftReportContext) => {
                     const { meansOfTransport } = formErrors || {};
                     return meansOfTransport ? false : true;
                 },
-                countriesIsValid: ({ formErrors }: ReportContext) => {
+                countriesIsValid: ({ formErrors }: DraftReportContext) => {
                     const { countries } = formErrors || {};
                     return countries ? false : true;
                 },
-                reportIsValid: ({ formErrors }: ReportContext) => {
-                    console.log({ formErrors });
+                reportIsValid: ({ formErrors }: DraftReportContext) => {
                     if (!formErrors) {
                         return true;
                     }
@@ -193,7 +189,7 @@ export const reportCreateMachine =
             },
             actions: {
                 assignFormChange: assign((context, event) => {
-                    const ev = event as { type: 'FormChange'; value: ReportContext };
+                    const ev = event as { type: 'FORM_CHANGE'; value: DraftReportContext };
                     return ev.value;
                 }),
             },
