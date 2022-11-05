@@ -1,0 +1,70 @@
+{
+  "countries": [
+    {
+      "key": "PL",
+      "text": "Poland"
+    },
+    {
+      "key": "DE",
+      "text": "Germany"
+    }
+  ],
+  "draftReports": [
+    {
+      "some": "2",
+      "countries": [
+        "3"
+      ],
+      "id": 1
+    },
+    {
+      "from": "2022-11-04T23:00:00.000Z",
+      "to": "2022-11-29T23:00:00.000Z",
+      "numberOfPeople": "3",
+      "meansOfTransport": [
+        "2",
+        "1"
+      ],
+      "countries": [
+        "PL",
+        "DE"
+      ],
+      "creationDate": "2022-11-05T13:20:16.872Z",
+      "id": "a4b14494-73df-4ad2-9f45-fe1f29423c46"
+    },
+    {
+      "from": "2022-11-04T23:00:00.000Z",
+      "to": "2022-11-22T23:00:00.000Z",
+      "numberOfPeople": "4",
+      "meansOfTransport": [
+        "2",
+        "1"
+      ],
+      "countries": [
+        "PL",
+        "DE"
+      ],
+      "creationDate": "2022-11-05T13:34:51.183Z",
+      "id": "ea1204fc-bbd8-48da-9182-d16f93392b5f"
+    }
+  ],
+  "meansOfTransport": [
+    {
+      "key": "0",
+      "text": "Airplane"
+    },
+    {
+      "key": "1",
+      "text": "Car"
+    },
+    {
+      "key": "2",
+      "text": "Ferry"
+    },
+    {
+      "key": "3",
+      "text": "Train"
+    }
+  ],
+  "reports": []
+}

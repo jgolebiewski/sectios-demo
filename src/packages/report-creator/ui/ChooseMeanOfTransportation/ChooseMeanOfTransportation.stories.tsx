@@ -1,6 +1,6 @@
 import { PrimaryButton } from '@fluentui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ComponentStory, Meta } from '@storybook/react';
+import { ComponentStory } from '@storybook/react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { reportCreatorSchema } from '../../schemas/validation-schema';
 import { ChooseMeanOfTransportation } from './ChooseMeanOfTransportation';

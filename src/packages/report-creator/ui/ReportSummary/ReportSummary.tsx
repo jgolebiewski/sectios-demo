@@ -1,10 +1,11 @@
-import { DraftReport } from '../../machines/reportCreator.machine';
 import { DEFAULT_DATE_FORMAT } from '../../../../core/defaults';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { Country, MeanOfTransport } from '../../../../core/types';
 import { DataService } from '../../../../core/services/DataService';
 import { SummaryLabel } from './ReportSummary.styled';
+import { DraftReport } from '../../domain/types';
+import { ReportCreatorSection } from '../ReportCreator.styled';
 
 export const ReportSummary = ({ report }: { report: DraftReport }): JSX.Element => {
     const fields = Object.keys(report) as Array<keyof typeof report>;
@@ -53,8 +54,8 @@ export const ReportSummary = ({ report }: { report: DraftReport }): JSX.Element 
         }
 
         if (field === 'meansOfTransport' && Array.isArray(value)) {
-            const v = means.filter((mean) => value.includes(mean.key.toString()));
-            return v.map((c) => c.text).join(', ');
+            const values = means.filter((mean) => value.includes(mean.key.toString()));
+            return values.map((c) => c.text).join(', ');
         }
 
         if (value.toString().indexOf('Z') !== -1) {
@@ -65,12 +66,12 @@ export const ReportSummary = ({ report }: { report: DraftReport }): JSX.Element 
     };
 
     return (
-        <div>
+        <ReportCreatorSection>
             {fields.map((field, index: number) => (
                 <div key={index}>
                     <SummaryLabel>{niceLabel(field)}</SummaryLabel>: {formatValue(field)}
                 </div>
             ))}
-        </div>
+        </ReportCreatorSection>
     );
 };

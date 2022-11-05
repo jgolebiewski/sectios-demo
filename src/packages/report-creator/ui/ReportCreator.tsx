@@ -1,6 +1,6 @@
 import { useMachine } from '@xstate/react';
 import { Greetings } from './Greetings/Greetings';
-import { DraftReport, DraftReportContext, reportCreateMachine } from '../machines/reportCreator.machine';
+import { reportCreateMachine } from '../machines/reportCreator.machine';
 import { reportCreatorSchema } from '../schemas/validation-schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -14,12 +14,17 @@ import { ButtonsWrapper, CreatorWrapper } from './ReportCreator.styled';
 import { useEffect } from 'react';
 import { ReportSummary } from './ReportSummary/ReportSummary';
 import { ReportCreatorService } from '../services/ReportCreatorService';
+import { DraftReport, DraftReportContext } from '../domain/types';
+import { v4 as uuidv4 } from 'uuid';
 
 export const ReportCreator = (): JSX.Element => {
     const [state, send] = useMachine(reportCreateMachine, {
         services: {
             saveReport: async (context, _event) => {
-                return ReportCreatorService.saveReport(context.data);
+                const draft = context.data;
+                draft.creationDate = new Date();
+                draft.id = uuidv4();
+                return ReportCreatorService.saveReport(draft);
             },
         },
     });
@@ -36,7 +41,6 @@ export const ReportCreator = (): JSX.Element => {
     };
 
     const handleNextState = () => {
-        console.log(state.event);
         const data: DraftReport = methods.getValues();
         const ctx: DraftReportContext = {
             data,
@@ -60,7 +64,7 @@ export const ReportCreator = (): JSX.Element => {
 
     return (
         <CreatorWrapper>
-            <h1>Report Creator</h1>
+            <h1>Report Creator - {state.value}</h1>
             <FormProvider {...methods}>
                 <form>
                     {state.matches('WELCOME') && <Greetings handleStart={() => send('START')} />}
@@ -73,11 +77,13 @@ export const ReportCreator = (): JSX.Element => {
 
                     {showPrevNext() && (
                         <ButtonsWrapper>
-                            <DefaultButton onClick={handlePreviousState}>Previous</DefaultButton>
+                            <DefaultButton onClick={handlePreviousState} disabled={state.matches('CHOOSE_PERIOD')}>
+                                Previous
+                            </DefaultButton>
                             <DefaultButton onClick={handleNextState}>Next</DefaultButton>
                         </ButtonsWrapper>
                     )}
-                    {state.matches('Summary') && (
+                    {state.matches('SUMMARY') && (
                         <>
                             <ReportSummary report={state.context.data} />
                             <ButtonsWrapper>

@@ -1,19 +1,17 @@
-import { IDropdownOption } from '@fluentui/react';
 import { CheckboxGroup } from '@reports/ui/CheckboxGroup/CheckboxGroup';
 import { FormError } from '@reports/ui/FormError/FormError';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { DataService } from '../../../../core/services/DataService';
 import { MeanOfTransport } from '../../../../core/types';
-import { ChooseMeanOfTransportationWrapper } from './ChooseMeanOfTransportation.styled';
+import { DraftReport } from '../../domain/types';
+import { ReportCreatorSection } from '../ReportCreator.styled';
 
 export const ChooseMeanOfTransportation = (): JSX.Element => {
     const {
         control,
-        setValue,
-        watch,
         formState: { errors },
-    } = useFormContext<{ meansOfTransport: any[] }>();
+    } = useFormContext<DraftReport>();
 
     const [means, setMeans] = useState<MeanOfTransport[]>([]);
 
@@ -25,7 +23,7 @@ export const ChooseMeanOfTransportation = (): JSX.Element => {
     }, []);
 
     return (
-        <ChooseMeanOfTransportationWrapper>
+        <ReportCreatorSection>
             <div>
                 <CheckboxGroup
                     groups={means}
@@ -36,6 +34,6 @@ export const ChooseMeanOfTransportation = (): JSX.Element => {
 
                 <FormError>{(errors && errors.meansOfTransport?.message) || ''}</FormError>
             </div>
-        </ChooseMeanOfTransportationWrapper>
+        </ReportCreatorSection>
     );
 };

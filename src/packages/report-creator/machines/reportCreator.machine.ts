@@ -1,20 +1,6 @@
-import { FieldErrorsImpl } from 'react-hook-form';
 import { createMachine, assign } from 'xstate';
 import { DateService } from '../../../core/services/DateService';
-
-export interface DraftReport {
-    from: string;
-    to: string;
-    numberOfPeople: number | null;
-    meansOfTransport: string[];
-    countries: string[];
-}
-export type DraftReportErrors = FieldErrorsImpl<DraftReport>;
-
-export interface DraftReportContext {
-    data: DraftReport;
-    formErrors: DraftReportErrors | null;
-}
+import { DraftReportContext } from '../domain/types';
 
 const report = {
     from: '',
@@ -50,9 +36,9 @@ export const reportCreateMachine =
             preserveActionOrder: true,
             predictableActionArguments: true,
             id: 'ReportCreator',
-            initial: 'Welcome',
+            initial: 'WELCOME',
             states: {
-                Welcome: {
+                WELCOME: {
                     on: {
                         START: {
                             target: 'CHOOSE_PERIOD',
@@ -85,7 +71,7 @@ export const reportCreateMachine =
                             actions: 'assignFormChange',
                         },
                         NEXT: {
-                            target: 'Summary',
+                            target: 'SUMMARY',
                             cond: 'chooseNumberOfPeopleIsValid',
                         },
                         PREV: {
@@ -93,7 +79,7 @@ export const reportCreateMachine =
                         },
                     },
                 },
-                Summary: {
+                SUMMARY: {
                     on: {
                         FINISH: {
                             target: 'SAVING_REPORT',

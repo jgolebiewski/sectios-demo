@@ -1,4 +1,5 @@
 {
     "/api/*": "/$1",
-    "/means-of-transport": "/meansOfTransport"
+    "/means-of-transport": "/meansOfTransport",
+    "/draft-reports": "/draftReports"
 }

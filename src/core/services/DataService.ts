@@ -13,8 +13,8 @@ const getCountries = (): Promise<Response<Country>> => {
 
     return HttpClient.get(getBaseUrl() + 'api/countries').then((response) => {
         const data = response.data;
-        cachedCountries = new Set(data.countries);
-        return { data: data.countries };
+        cachedCountries = new Set(data);
+        return { data };
     });
 };
 
@@ -27,8 +27,8 @@ const getMeansOfTransport = (): Promise<Response<MeanOfTransport>> => {
 
     return HttpClient.get(getBaseUrl() + 'api/means-of-transport').then((response) => {
         const data = response.data;
-        cachedMeans = new Set(data.meansOfTransport);
-        return { data: data.meansOfTransport };
+        cachedMeans = new Set(data);
+        return { data };
     });
 };
 

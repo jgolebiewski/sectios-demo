@@ -1,7 +1,8 @@
 import { CustomNumberField } from '@reports/ui/CustomNumberField/CustomNumberField';
 import { FormError } from '@reports/ui/FormError/FormError';
 import { useFormContext } from 'react-hook-form';
-import { DraftReport } from '../../machines/reportCreator.machine';
+import { DraftReport } from '../../domain/types';
+import { ReportCreatorSection } from '../ReportCreator.styled';
 
 export const ChooseNumberOfPeople = (): JSX.Element => {
     const {
@@ -10,9 +11,9 @@ export const ChooseNumberOfPeople = (): JSX.Element => {
     } = useFormContext<DraftReport>();
 
     return (
-        <div className="mb-10">
+        <ReportCreatorSection>
             <CustomNumberField control={control} label="Number of people" name="numberOfPeople" />
             <FormError>{(errors && errors.numberOfPeople?.message) || ''}</FormError>
-        </div>
+        </ReportCreatorSection>
     );
 };
