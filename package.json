@@ -106,6 +106,7 @@
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-plugin-storybook": "^0.6.4",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "flush-promises": "^1.0.2",
     "husky": "^7.0.0",
     "madge": "^5.0.1",
     "prettier": "^2.7.1",
