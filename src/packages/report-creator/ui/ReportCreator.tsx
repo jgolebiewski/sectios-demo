@@ -55,7 +55,8 @@ export const ReportCreator = (): JSX.Element => {
             !state.matches('WELCOME') &&
             !state.matches('FINISH') &&
             !state.matches('END_REPORT') &&
-            !state.matches('SUMMARY')
+            !state.matches('SUMMARY') &&
+            !state.matches('ERROR_OCCURRED')
         );
     };
     useEffect(() => {
@@ -74,6 +75,7 @@ export const ReportCreator = (): JSX.Element => {
                     {state.matches('CHOOSE_MEANS_OF_TRANSPORT') && <ChooseMeanOfTransportation />}
                     {state.matches('FINISH') && <Ending />}
                     {state.matches('END_REPORT') && <Ending />}
+                    {state.matches('ERROR_OCCURRED') && <h3>Something went wrong.</h3>}
 
                     {showPrevNext() && (
                         <ButtonsWrapper>

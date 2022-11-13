@@ -90,7 +90,9 @@ export const reportCreateMachine =
                         },
                     },
                 },
-                ERROR_OCCURRED: {},
+                ERROR_OCCURRED: {
+                    type: 'final',
+                },
                 END_REPORT: {
                     type: 'final',
                 },
