@@ -1,70 +1,222 @@
 {
   "countries": [
     {
-      "key": "PL",
-      "text": "Poland"
+      "id": "PL1",
+      "code": "PL",
+      "name": "Poland",
+      "cities": [
+        {
+          "id": "C1",
+          "name": "Warsaw"
+        }
+      ]
     },
     {
-      "key": "DE",
-      "text": "Germany"
-    }
-  ],
-  "draftReports": [
-    {
-      "some": "2",
-      "countries": [
-        "3"
-      ],
-      "id": 1
-    },
-    {
-      "from": "2022-11-04T23:00:00.000Z",
-      "to": "2022-11-29T23:00:00.000Z",
-      "numberOfPeople": "3",
-      "meansOfTransport": [
-        "2",
-        "1"
-      ],
-      "countries": [
-        "PL",
-        "DE"
-      ],
-      "creationDate": "2022-11-05T13:20:16.872Z",
-      "id": "a4b14494-73df-4ad2-9f45-fe1f29423c46"
-    },
-    {
-      "from": "2022-11-04T23:00:00.000Z",
-      "to": "2022-11-22T23:00:00.000Z",
-      "numberOfPeople": "4",
-      "meansOfTransport": [
-        "2",
-        "1"
-      ],
-      "countries": [
-        "PL",
-        "DE"
-      ],
-      "creationDate": "2022-11-05T13:34:51.183Z",
-      "id": "ea1204fc-bbd8-48da-9182-d16f93392b5f"
+      "id": "DE1",
+      "code": "DE",
+      "name": "Germany",
+      "cities": [
+        {
+          "id": "C2",
+          "name": "Berlin"
+        }
+      ]
     }
   ],
   "meansOfTransport": [
     {
-      "key": "0",
-      "text": "Airplane"
+      "id": "0",
+      "name": "Airplane"
     },
     {
-      "key": "1",
-      "text": "Car"
+      "id": "1",
+      "name": "Car"
     },
     {
-      "key": "2",
-      "text": "Ferry"
+      "id": "2",
+      "name": "Ferry"
     },
     {
-      "key": "3",
-      "text": "Train"
+      "id": "3",
+      "name": "Train"
     }
   ],
-  "reports": []
+  "reports": [
+    {
+      "id": "8bf594a8-bf48-4e53-837f-eb81e419b464",
+      "budgetAssumed": 0,
+      "budgetSpent": 0,
+      "vacationPeriod": {
+        "from": "2022-11-14T23:00:00.000Z",
+        "to": "2022-11-29T23:00:00.000Z"
+      },
+      "countrySections": [
+        {
+          "country": {
+            "id": "PL1",
+            "code": "PL",
+            "name": "Poland",
+            "cities": [
+              {
+                "id": "C1",
+                "name": "Warsaw"
+              }
+            ]
+          },
+          "cities": [],
+          "period": {
+            "from": null,
+            "to": null
+          },
+          "accommodations": [],
+          "meansOfTransport": [
+            {
+              "id": "2",
+              "name": "Ferry"
+            },
+            {
+              "id": "1",
+              "name": "Car"
+            }
+          ]
+        },
+        {
+          "country": {
+            "id": "DE1",
+            "code": "DE",
+            "name": "Germany",
+            "cities": [
+              {
+                "id": "C2",
+                "name": "Berlin"
+              }
+            ]
+          },
+          "cities": [],
+          "period": {
+            "from": null,
+            "to": null
+          },
+          "accommodations": [],
+          "meansOfTransport": [
+            {
+              "id": "2",
+              "name": "Ferry"
+            },
+            {
+              "id": "1",
+              "name": "Car"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "849c3430-f0a2-4d63-b31f-e2171d5ac09d",
+      "budgetAssumed": 0,
+      "budgetSpent": 0,
+      "vacationPeriod": {
+        "from": "2022-11-14T23:00:00.000Z",
+        "to": "2022-11-29T23:00:00.000Z"
+      },
+      "countrySections": [
+        {
+          "country": {
+            "id": "PL1",
+            "code": "PL",
+            "name": "Poland",
+            "cities": [
+              {
+                "id": "C1",
+                "name": "Warsaw"
+              }
+            ]
+          },
+          "cities": [],
+          "period": {
+            "from": null,
+            "to": null
+          },
+          "accommodations": [],
+          "meansOfTransport": [
+            {
+              "id": "2",
+              "name": "Ferry"
+            },
+            {
+              "id": "1",
+              "name": "Car"
+            }
+          ]
+        },
+        {
+          "country": {
+            "id": "DE1",
+            "code": "DE",
+            "name": "Germany",
+            "cities": [
+              {
+                "id": "C2",
+                "name": "Berlin"
+              }
+            ]
+          },
+          "cities": [],
+          "period": {
+            "from": null,
+            "to": null
+          },
+          "accommodations": [],
+          "meansOfTransport": [
+            {
+              "id": "2",
+              "name": "Ferry"
+            },
+            {
+              "id": "1",
+              "name": "Car"
+            }
+          ]
+        }
+      ],
+      "created": "2022-11-15T16:21:22.174Z"
+    },
+    {
+      "id": "542d415b-b8c9-48e7-9712-9804183ccac1",
+      "budgetAssumed": 0,
+      "budgetSpent": 0,
+      "vacationPeriod": {
+        "from": "2022-11-14T23:00:00.000Z",
+        "to": "2022-11-29T23:00:00.000Z"
+      },
+      "countrySections": [
+        {
+          "country": {
+            "id": "DE1",
+            "code": "DE",
+            "name": "Germany",
+            "cities": [
+              {
+                "id": "C2",
+                "name": "Berlin"
+              }
+            ]
+          },
+          "cities": [],
+          "period": {
+            "from": null,
+            "to": null
+          },
+          "accommodations": [],
+          "meansOfTransport": [
+            {
+              "id": "0",
+              "name": "Airplane"
+            }
+          ]
+        }
+      ],
+      "created": "2022-11-15T16:29:03.554Z"
+    }
+  ]
 }

@@ -1,8 +1,8 @@
 import { HttpClient, getBaseUrl } from '../../../core/HttpClient';
-import { DraftReport } from '../domain/types';
+import { Report } from '../../../domain/Report';
 
-const saveReport = (report: DraftReport) => {
-    return HttpClient.post(getBaseUrl() + 'api/draft-reports', report).catch(() => 'Error occurred.');
+const saveReport = (report: Report) => {
+    return HttpClient.post(getBaseUrl() + 'api/reports', report).catch(() => 'Error occurred.');
 };
 
 export const ReportCreatorService = {

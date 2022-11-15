@@ -24,6 +24,7 @@ export const _ChooseCountry: ComponentStory<typeof ChooseCountry> = (args: any) 
 
     const handleClick = () => {
         methods.trigger();
+        console.log(methods.getValues());
     };
 
     return (

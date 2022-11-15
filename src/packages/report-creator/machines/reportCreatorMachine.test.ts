@@ -96,7 +96,6 @@ describe('Report Create Machine', () => {
         const machine = reportCreateMachine.withConfig({
             services: {
                 saveReport: (_context, _event) => {
-                    console.log('reject');
                     return Promise.reject('Error');
                 },
             },
@@ -106,7 +105,7 @@ describe('Report Create Machine', () => {
             const { context } = state;
             context.data.from = new Date('2022-10-10').toISOString();
             context.data.to = new Date('2022-10-21').toISOString();
-            context.data.countries = ['PL'];
+            context.data.countries = ['PL1'];
             context.data.meansOfTransport = ['1'];
             context.data.numberOfPeople = 2;
             context.formErrors = {};

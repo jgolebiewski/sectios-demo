@@ -14,42 +14,45 @@ export const CheckboxGroup = (props: CheckboxGroupProps & CustomFieldProps): JSX
         <Controller
             name={name || '_name_'}
             control={control}
-            render={({ field }) => (
-                <>
-                    {label && <h5>{label}</h5>}
-                    {groups.map((item, _index) => (
-                        <Checkbox
-                            className="mb-10"
-                            disabled={disabled}
-                            key={item.key}
-                            name={`${item.text}`}
-                            label={item.text}
-                            checked={field.value && field.value.some((ex: string) => ex === item.key)}
-                            onChange={(
-                                event: FormEvent<HTMLElement | HTMLInputElement> | undefined,
-                                checked: boolean | undefined
-                            ) => {
-                                if (!event) {
-                                    return;
-                                }
-                                const ht = event.target as HTMLInputElement;
-                                const inputName = ht.name;
-                                const key = groups.find((group: IDropdownOption) => group.text === inputName)?.key;
+            render={({ field }) => {
+                let value = field.value as string[];
 
-                                if (!field.value) {
-                                    field.value = [] as string[];
-                                }
-                                if (checked) {
-                                    // field.value.push(name);
-                                    field.onChange([...field.value, key]);
-                                } else {
-                                    field.onChange(field.value.filter((v: string) => v !== key));
-                                }
-                            }}
-                        />
-                    ))}
-                </>
-            )}
+                return (
+                    <>
+                        {label && <h5>{label}</h5>}
+                        {groups.map((item, _index) => (
+                            <Checkbox
+                                className="mb-10"
+                                disabled={disabled}
+                                key={item.key}
+                                name={`${item.text}`}
+                                label={item.text}
+                                checked={value && value.some((ex: string) => ex === item.key)}
+                                onChange={(
+                                    event: FormEvent<HTMLElement | HTMLInputElement> | undefined,
+                                    checked: boolean | undefined
+                                ) => {
+                                    if (!event) {
+                                        return;
+                                    }
+                                    const ht = event.target as HTMLInputElement;
+                                    const inputName = ht.name;
+                                    const key = groups.find((group: IDropdownOption) => group.text === inputName)?.key;
+
+                                    if (!value) {
+                                        value = [] as string[];
+                                    }
+                                    if (checked) {
+                                        field.onChange([...value, key]);
+                                    } else {
+                                        field.onChange(value.filter((v: string) => v !== key));
+                                    }
+                                }}
+                            />
+                        ))}
+                    </>
+                );
+            }}
         />
     );
 };

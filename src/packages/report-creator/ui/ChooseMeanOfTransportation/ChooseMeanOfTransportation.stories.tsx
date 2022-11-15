@@ -18,7 +18,7 @@ export const _ChooseMeanOfTransportation: ComponentStory<typeof ChooseMeanOfTran
             countries: ['PL'],
             from: new Date(),
             to: new Date(),
-            meansOfTransport: ['1'],
+            meansOfTransport: [{ key: '1', text: 'Car' }],
         },
     });
 
@@ -26,7 +26,9 @@ export const _ChooseMeanOfTransportation: ComponentStory<typeof ChooseMeanOfTran
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit((data) => console.log('submit', data))}>
                 <ChooseMeanOfTransportation />
-                <PrimaryButton type="submit">Submit</PrimaryButton>
+                <PrimaryButton type="button" onClick={() => console.log(methods.getValues())}>
+                    Submit
+                </PrimaryButton>
             </form>
         </FormProvider>
     );

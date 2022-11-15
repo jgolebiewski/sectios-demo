@@ -16,15 +16,18 @@ import { ReportSummary } from './ReportSummary/ReportSummary';
 import { ReportCreatorService } from '../services/ReportCreatorService';
 import { DraftReport, DraftReportContext } from '../domain/types';
 import { v4 as uuidv4 } from 'uuid';
+import { ReportFactory } from '../../../core/reportFactory';
 
 export const ReportCreator = (): JSX.Element => {
     const [state, send] = useMachine(reportCreateMachine, {
         services: {
             saveReport: async (context, _event) => {
-                const draft = context.data;
+                const draft: DraftReport = context.data;
                 draft.creationDate = new Date();
                 draft.id = uuidv4();
-                return ReportCreatorService.saveReport(draft);
+                return ReportFactory.create(draft).then((report) => {
+                    return ReportCreatorService.saveReport(report);
+                });
             },
         },
     });

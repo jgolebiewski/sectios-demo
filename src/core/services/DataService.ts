@@ -1,5 +1,7 @@
+import { Country } from '../../domain/Country';
+import { MeanOfTransport } from '../../domain/MeanOfTransport';
 import { HttpClient, getBaseUrl } from '../HttpClient';
-import { Country, MeanOfTransport, Response } from '../types';
+import { Response } from '../types';
 
 let cachedCountries = new Set<Country>();
 let cachedMeans = new Set<MeanOfTransport>();

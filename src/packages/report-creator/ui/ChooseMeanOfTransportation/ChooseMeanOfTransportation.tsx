@@ -1,9 +1,9 @@
+import { IDropdownOption } from '@fluentui/react';
 import { CheckboxGroup } from '@reports/ui/CheckboxGroup/CheckboxGroup';
 import { FormError } from '@reports/ui/FormError/FormError';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { DataService } from '../../../../core/services/DataService';
-import { MeanOfTransport } from '../../../../core/types';
 import { DraftReport } from '../../domain/types';
 import { ReportCreatorSection } from '../ReportCreator.styled';
 
@@ -13,12 +13,12 @@ export const ChooseMeanOfTransportation = (): JSX.Element => {
         formState: { errors },
     } = useFormContext<DraftReport>();
 
-    const [means, setMeans] = useState<MeanOfTransport[]>([]);
+    const [means, setMeans] = useState<IDropdownOption[]>([]);
 
     useEffect(() => {
         (async () => {
             const response = await DataService.getMeansOfTransport();
-            setMeans(response.data);
+            setMeans(response.data.map((mt) => ({ key: mt.id, text: mt.name })));
         })();
     }, []);
 

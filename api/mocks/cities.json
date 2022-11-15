@@ -1,0 +1,22 @@
+{
+    "cities": [
+        {
+            "id": "C1",
+            "name": "Warsaw",
+            "country": {
+                "id": "PL1",
+                "code": "PL",
+                "name": "Poland"
+            }
+        },
+        {
+            "id": "C2",
+            "name": "Berlin",
+            "country": {
+                "id": "DE1",
+                "code": "DE",
+                "name": "Germany"
+            }
+        }
+    ]
+}

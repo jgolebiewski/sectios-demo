@@ -1,20 +1,20 @@
 {
     "meansOfTransport": [
         {
-            "key": "0",
-            "text": "Airplane"
+            "id": "0",
+            "name": "Airplane"
         },
         {
-            "key": "1",
-            "text": "Car"
+            "id": "1",
+            "name": "Car"
         },
         {
-            "key": "2",
-            "text": "Ferry"
+            "id": "2",
+            "name": "Ferry"
         },
         {
-            "key": "3",
-            "text": "Train"
+            "id": "3",
+            "name": "Train"
         }
     ]
 }

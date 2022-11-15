@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { object, date, ref, array, string, number } from 'yup';
+import { object, date, ref, array, number, string } from 'yup';
 import { DEFAULT_DATE_FORMAT } from '../../../core/defaults';
 
 export const reportCreatorSchema = object({

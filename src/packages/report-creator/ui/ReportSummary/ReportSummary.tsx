@@ -1,11 +1,12 @@
 import { DEFAULT_DATE_FORMAT } from '../../../../core/defaults';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-import { Country, MeanOfTransport } from '../../../../core/types';
 import { DataService } from '../../../../core/services/DataService';
 import { SummaryLabel } from './ReportSummary.styled';
 import { DraftReport } from '../../domain/types';
 import { ReportCreatorSection } from '../ReportCreator.styled';
+import { Country } from '../../../../domain/Country';
+import { MeanOfTransport } from '../../../../domain/MeanOfTransport';
 
 export const ReportSummary = ({ report }: { report: DraftReport }): JSX.Element => {
     const fields = Object.keys(report) as Array<keyof typeof report>;
@@ -49,16 +50,27 @@ export const ReportSummary = ({ report }: { report: DraftReport }): JSX.Element 
         }
 
         if (field === 'countries' && Array.isArray(value)) {
-            const v = countries.filter((country) => value.includes(country.key.toString()));
-            return v.map((c) => c.text).join(', ');
+            const selected: Country[] = [];
+            value.forEach((countryOption) => {
+                const v = countries.filter((country) => country.id === countryOption);
+                selected.push(...v);
+            });
+
+            return selected.map((c) => c.name).join(', ');
         }
 
         if (field === 'meansOfTransport' && Array.isArray(value)) {
-            const values = means.filter((mean) => value.includes(mean.key.toString()));
-            return values.map((c) => c.text).join(', ');
+            const selected: MeanOfTransport[] = [];
+
+            value.forEach((meanOption) => {
+                const values = means.filter((mean) => mean.id === meanOption);
+                selected.push(...values);
+            });
+
+            return selected.map((c) => c.name).join(', ');
         }
 
-        if (value.toString().indexOf('Z') !== -1) {
+        if (value.toString().indexOf('Z') !== -1 && !Array.isArray(value)) {
             return moment(value).format(DEFAULT_DATE_FORMAT);
         } else {
             return value;

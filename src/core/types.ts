@@ -1,3 +1,5 @@
+import { IDropdownOption } from '@fluentui/react';
+
 // eslint-disable-next-line no-shadow
 export enum MeansOfTransports {
     Airplane,
@@ -6,15 +8,14 @@ export enum MeansOfTransports {
     Ferry,
 }
 
-export interface Country {
-    key: number;
-    text: string;
-}
+// export type CountryOption = IDropdownOption;
+export type CountryOption = string;
 
-export interface MeanOfTransport {
-    key: MeansOfTransports;
-    text: string;
-}
+export type MeanOfTransportOption = string;
+
+export type AccommodationOption = IDropdownOption;
+
+export type CityOption = IDropdownOption;
 
 export interface Response<T> {
     data: T[];
