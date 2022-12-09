@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const MainPageWrapper = styled.nav`
-    width: 80vw;
+export const MainPageWrapper = styled.section`
+    width: 90vw;
     margin: auto;
 `;

@@ -17,7 +17,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<MainPage />} />
                     <Route path="/report-creator" element={<ReportCreatorPage />} />
-                    <Route path="/report" element={<ReportPage />} />
+                    <Route path="/report/:id" element={<ReportPage />} />
                 </Routes>
             </BrowserRouter>
         </AppWrapper>
