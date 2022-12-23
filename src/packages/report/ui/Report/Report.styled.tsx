@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const ReportWrapper = styled.div`
     width: 90vw;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 20vw 1fr;
     margin: 5vh auto;
 `;
 

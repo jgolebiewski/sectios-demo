@@ -2,24 +2,36 @@ import { useFormContext } from 'react-hook-form';
 import { CustomTextField } from '@reports/ui';
 import { Wrapper } from '../Wrapper/Wrapper.styled';
 import { OverviewModel } from '../../domain/OverviewModel';
-import { ReportModel } from '../../domain/ReportModel';
+import { Report } from '../../../../domain/Report';
+import { PeriodComponent } from '@reports/ui/PeriodComponent/PeriodComponent';
+import { FormError } from '@reports/ui/FormError/FormError';
 
 interface OverviewProps {
     overview?: OverviewModel;
 }
 
-export const OverView: React.FC<OverviewProps> = (props) => {
+export const Overview: React.FC<OverviewProps> = (props) => {
     const {
         control,
         formState: { errors },
-    } = useFormContext<ReportModel>();
+    } = useFormContext<Report>();
 
     return (
         <Wrapper>
-            <h3>Overview</h3>
-            <CustomTextField name="overview.name" label="Name" control={control} />
-            {errors && errors.overview && errors.overview.name && <p className="required">This field is required</p>}
-            <CustomTextField name="overview.author" control={control} disabled={true} label="Author" />
+            <h3>General Section</h3>
+            <CustomTextField isRequired={true} name="budgetAssumed" label="Budget assumed" control={control} />
+            <FormError>{(errors && errors.budgetAssumed?.message) || ''}</FormError>
+
+            <CustomTextField isRequired={true} name="budgetSpent" control={control} label="Budget spent" />
+            <FormError>{(errors && errors.budgetSpent?.message) || ''}</FormError>
+
+            <PeriodComponent
+                fromField="vacationPeriod.from"
+                toField="vacationPeriod.to"
+                control={control}
+                errors={errors}
+                label="Vacations period"
+            />
         </Wrapper>
     );
 };

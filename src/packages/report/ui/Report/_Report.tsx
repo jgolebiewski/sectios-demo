@@ -3,15 +3,14 @@ import { ReportModel } from '../../domain/ReportModel';
 import { DefaultButton, PrimaryButton, Stack } from '@fluentui/react';
 import { ReportContent, ReportWrapper, TittleWrapper } from './Report.styled';
 import { FormProvider, useForm } from 'react-hook-form';
-import { OverView } from '../Overview/Overview';
+import { Overview } from '../Overview/Overview';
 import { RoutesComponent } from '../Routes/RoutesComponent';
 import { Sections } from '../Sections/Sections';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../../schema/validation-schema';
-import { ReportNavigation } from '../ReportNavigation/ReportNavigation';
 
 let renderCount = 0;
-export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ report }) => {
+export const _Report: React.FunctionComponent<{ report: ReportModel }> = ({ report }) => {
     renderCount++;
 
     const methods = useForm<ReportModel>({
@@ -42,7 +41,7 @@ export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ repor
     return (
         <ReportWrapper>
             <FormProvider {...methods}>
-                <ReportNavigation report={report} />
+                {/*<ReportNavigation report={report} />*/}
                 <ReportContent>
                     <TittleWrapper>
                         <h1>
@@ -52,7 +51,8 @@ export const Report: React.FunctionComponent<{ report: ReportModel }> = ({ repor
                     </TittleWrapper>
 
                     <form onSubmit={methods.handleSubmit(onSubmit)}>
-                        <OverView />
+                        <Overview />
+
                         <Sections />
                         <RoutesComponent />
                         <Stack horizontal>

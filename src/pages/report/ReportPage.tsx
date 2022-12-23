@@ -1,11 +1,13 @@
-import { Report, ReportModel } from '@reports/report';
-import { useState } from 'react';
+import { ReportComponent } from '@reports/report';
+import { useReport } from '@reports/report/hooks/useReport';
 
 export const ReportPage = (): JSX.Element => {
-    const reportModel = new ReportModel();
-    reportModel.name = 'Some awesome Report';
+    const { loading, report } = useReport();
 
-    const [report] = useState(reportModel);
-
-    return <Report report={report} />;
+    return (
+        <>
+            {loading && <h1>Loading...</h1>}
+            {report && <ReportComponent report={report} />}
+        </>
+    );
 };

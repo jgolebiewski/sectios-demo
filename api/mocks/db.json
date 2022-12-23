@@ -41,6 +41,24 @@
       "name": "Train"
     }
   ],
+  "accommodations": [
+    {
+      "id": "1",
+      "name": "Hotel"
+    },
+    {
+      "id": "2",
+      "name": "Motel"
+    },
+    {
+      "id": "3",
+      "name": "Campsite"
+    },
+    {
+      "id": "4",
+      "name": "Air BnB"
+    }
+  ],
   "reports": [
     {
       "id": "8bf594a8-bf48-4e53-837f-eb81e419b464",
@@ -217,6 +235,78 @@
         }
       ],
       "created": "2022-11-15T16:29:03.554Z"
+    },
+    {
+      "id": "dbdb1c9f-9866-4e24-9976-f50a602ac534",
+      "budgetAssumed": 0,
+      "budgetSpent": 0,
+      "vacationPeriod": {
+        "from": "2022-12-04T23:00:00.000Z",
+        "to": "2022-12-21T23:00:00.000Z"
+      },
+      "countrySections": [
+        {
+          "id": "43841470-4adb-4983-b09e-c3cefeb89f76",
+          "country": {
+            "id": "PL1",
+            "code": "PL",
+            "name": "Poland",
+            "cities": [
+              {
+                "id": "C1",
+                "name": "Warsaw"
+              }
+            ]
+          },
+          "cities": [],
+          "period": {
+            "from": null,
+            "to": null
+          },
+          "accommodations": [],
+          "meansOfTransport": [
+            {
+              "id": "2",
+              "name": "Ferry"
+            },
+            {
+              "id": "1",
+              "name": "Car"
+            }
+          ]
+        },
+        {
+          "id": "9162dfeb-b099-4b0a-af90-c1cc53c0a577",
+          "country": {
+            "id": "DE1",
+            "code": "DE",
+            "name": "Germany",
+            "cities": [
+              {
+                "id": "C2",
+                "name": "Berlin"
+              }
+            ]
+          },
+          "cities": [],
+          "period": {
+            "from": null,
+            "to": null
+          },
+          "accommodations": [],
+          "meansOfTransport": [
+            {
+              "id": "2",
+              "name": "Ferry"
+            },
+            {
+              "id": "1",
+              "name": "Car"
+            }
+          ]
+        }
+      ],
+      "created": "2022-12-19T17:52:47.902Z"
     }
   ]
 }
