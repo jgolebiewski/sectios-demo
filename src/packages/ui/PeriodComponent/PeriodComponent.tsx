@@ -1,5 +1,6 @@
+import { ErrorMessage } from '@hookform/error-message';
+import { ReportForm } from '@reports/report/data/ReportForm';
 import { Control, FieldErrors, useWatch } from 'react-hook-form';
-import { Report } from '../../../domain/Report';
 import { CustomDatePicker } from '../CustomDatePicker/CustomDatePicker';
 import { FormError } from '../FormError/FormError';
 import { PeriodWrapper } from './PeriodComponent.styled';
@@ -9,25 +10,24 @@ interface PeriodComponentProps {
     toField: string;
     label: string;
     control: Control<any, object>;
-    errors: FieldErrors<Report> | undefined;
+    errors: FieldErrors<ReportForm> | undefined;
+    isRequired?: boolean;
 }
 
 export const PeriodComponent = (props: PeriodComponentProps): JSX.Element => {
-    const { fromField, toField, control, errors, label } = props;
+    const { fromField, toField, control, errors, label, isRequired } = props;
 
     const startDate = useWatch({ control, name: fromField });
     return (
-        <PeriodWrapper>
+        <PeriodWrapper isRequired={isRequired || false}>
             <label>{label}</label>
             <div>
-                <CustomDatePicker
+                <CustomDatePicker name={fromField} label="Date from" control={control} maxDate={new Date()} />
+                <ErrorMessage
+                    errors={errors}
                     name={fromField}
-                    label="Date from"
-                    control={control}
-                    isRequired={true}
-                    maxDate={new Date()}
+                    render={({ message }) => <FormError>{message}</FormError>}
                 />
-                <FormError>{(errors && errors[fromField as keyof Report]?.message) || ''}</FormError>
             </div>
             <div>
                 <CustomDatePicker
@@ -35,10 +35,13 @@ export const PeriodComponent = (props: PeriodComponentProps): JSX.Element => {
                     label="Date to"
                     control={control}
                     disabled={!startDate}
-                    isRequired={true}
                     minDate={new Date(startDate || '')}
                 />
-                <FormError>{(errors && errors[toField as keyof Report]?.message) || ''}</FormError>
+                <ErrorMessage
+                    errors={errors}
+                    name={toField}
+                    render={({ message }) => <FormError>{message}</FormError>}
+                />
             </div>
         </PeriodWrapper>
     );

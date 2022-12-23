@@ -28,7 +28,7 @@ export const schema = yup
     })
     .required();
 
-const vacationPeriodSection = object().shape({
+const periodSection = object().shape({
     from: date().typeError('Provide valid date').required('Field From is required'),
     to: date()
         .typeError('Provide valid date')
@@ -39,13 +39,9 @@ const vacationPeriodSection = object().shape({
 const countriesSection = array().of(
     object().shape({
         cities: array().of(string()).min(1, 'Select at least one option'),
-        from: date().typeError('Provide valid date').required('Field From is required'),
         meansOfTransportOption: array().of(string()).min(1, 'Select at least one option'),
         accommodationOption: array().of(string()).min(1, 'Select at least one option'),
-        to: date()
-            .typeError('Provide valid date')
-            .required('Field To is required')
-            .min(ref('from'), ({ min }) => `Date need to be before ${moment(min).format(DEFAULT_DATE_FORMAT)}`),
+        period: periodSection,
     })
 );
 
@@ -61,5 +57,5 @@ export const reportValidationSchema = object({
         .moreThan(0, 'The budget must be greater then 0')
         .integer('Provide only numbers')
         .required('Provide budget'),
-    vacationPeriod: vacationPeriodSection,
+    vacationPeriod: periodSection,
 }).required();

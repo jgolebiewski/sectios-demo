@@ -1,10 +1,12 @@
 import { IDropdownOption } from '@fluentui/react';
+import { ErrorMessage } from '@hookform/error-message';
 import { useState, useEffect } from 'react';
 import { FieldErrors } from 'react-hook-form';
 import { DataService } from '../../../core/services/DataService';
 import { Report } from '../../../domain/Report';
 import { CheckboxGroup } from '../CheckboxGroup/CheckboxGroup';
 import { CustomFieldProps } from '../CustomFieldProps';
+import { FormError } from '../FormError/FormError';
 
 type Err = FieldErrors<Report> | undefined;
 
@@ -23,6 +25,7 @@ export const MeanOfTransportSelector = (props: MeanOfTransportSelectorProps): JS
     return (
         <div>
             <CheckboxGroup groups={means} {...props} />
+            <ErrorMessage {...props} render={({ message }) => <FormError>{message}</FormError>} />
         </div>
     );
 };

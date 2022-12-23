@@ -5,6 +5,7 @@ import { OverviewModel } from '../../domain/OverviewModel';
 import { Report } from '../../../../domain/Report';
 import { PeriodComponent } from '@reports/ui/PeriodComponent/PeriodComponent';
 import { FormError } from '@reports/ui/FormError/FormError';
+import { ErrorMessage } from '@hookform/error-message';
 
 interface OverviewProps {
     overview?: OverviewModel;
@@ -20,10 +21,19 @@ export const Overview: React.FC<OverviewProps> = (props) => {
         <Wrapper>
             <h3>General Section</h3>
             <CustomTextField isRequired={true} name="budgetAssumed" label="Budget assumed" control={control} />
-            <FormError>{(errors && errors.budgetAssumed?.message) || ''}</FormError>
+            <ErrorMessage
+                name="budgetAssumed"
+                errors={errors}
+                render={({ message }) => <FormError>{message}</FormError>}
+            />
 
             <CustomTextField isRequired={true} name="budgetSpent" control={control} label="Budget spent" />
-            <FormError>{(errors && errors.budgetSpent?.message) || ''}</FormError>
+
+            <ErrorMessage
+                name="budgetSpent"
+                errors={errors}
+                render={({ message }) => <FormError>{message}</FormError>}
+            />
 
             <PeriodComponent
                 fromField="vacationPeriod.from"

@@ -15,7 +15,8 @@ export const ReportComponent = ({ report }: { report: ReportForm }): JSX.Element
     const methods = useForm<ReportForm>({
         defaultValues: report,
         resolver: yupResolver(reportValidationSchema),
-        reValidateMode: 'onBlur',
+        mode: 'onChange',
+        reValidateMode: 'onChange',
         criteriaMode: 'all',
         delayError: 100,
     });

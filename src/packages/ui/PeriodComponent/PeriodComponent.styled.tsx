@@ -14,4 +14,10 @@ export const PeriodWrapper = styled.div`
         margin: 0;
         padding: 0;
     }
+
+    > label:after {
+        content: ' *';
+        color: ${(props: { isRequired: boolean }) => (props.isRequired ? '#a4262c' : 'white')};
+        padding-right: 12px;
+    }
 `;

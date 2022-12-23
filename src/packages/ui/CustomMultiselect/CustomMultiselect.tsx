@@ -15,6 +15,7 @@ export const CustomMultiselect: FC<CustomFieldProps & CustomDropdownProps> = ({
     disabled,
     options,
     placeholder,
+    isRequired,
 }) => {
     return (
         <div className="ms-TextField">
@@ -30,6 +31,7 @@ export const CustomMultiselect: FC<CustomFieldProps & CustomDropdownProps> = ({
                         multiSelect
                         options={options}
                         disabled={disabled}
+                        required={isRequired}
                         onChange={(_event: FormEvent<HTMLDivElement>, item: IDropdownOption | undefined) => {
                             let values: string[] = field.value || [];
 
