@@ -1,9 +1,9 @@
-import { AppWrapper } from './App.styled';
 import { initializeIcons, setIconOptions } from '@fluentui/react';
 import { ReportPage } from './pages/report/ReportPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { MainPage } from './pages/main/MainPage';
 import { ReportCreatorPage } from './pages/report-creator/ReportCreatorPage';
+import { DefaultLayout } from './layouts/DefaultLayout';
 
 function App() {
     initializeIcons();
@@ -12,7 +12,7 @@ function App() {
     });
 
     return (
-        <AppWrapper>
+        <DefaultLayout>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<MainPage />} />
@@ -20,7 +20,7 @@ function App() {
                     <Route path="/report/:id" element={<ReportPage />} />
                 </Routes>
             </BrowserRouter>
-        </AppWrapper>
+        </DefaultLayout>
     );
 }
 

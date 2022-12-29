@@ -1,15 +1,13 @@
 import { ButtonsBar, ReportWrapper } from './Report.styled';
-
 import { ReportNavigation } from '../ReportNavigation/ReportNavigation';
-import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-
 import { yupResolver } from '@hookform/resolvers/yup';
 import { reportValidationSchema } from '../../schema/validation-schema';
 import { DefaultButton, PrimaryButton } from '@fluentui/react';
 import { Overview } from '../Overview/Overview';
 import { Countries } from '../Countries/Countries';
 import { ReportForm } from '../../domain/ReportForm';
+import { Link } from 'react-router-dom';
 
 export const ReportComponent = ({ report }: { report: ReportForm }): JSX.Element => {
     const methods = useForm<ReportForm>({
@@ -37,6 +35,7 @@ export const ReportComponent = ({ report }: { report: ReportForm }): JSX.Element
                     <ReportNavigation report={report} />
                 </div>
                 <div>
+                    <Link to={'/'}>Back</Link>
                     <form onSubmit={methods.handleSubmit(onSubmit)} id="reportForm">
                         <Overview htmlId={report.overview.htmlId} />
                         <Countries />
