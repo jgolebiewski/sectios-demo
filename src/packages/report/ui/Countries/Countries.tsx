@@ -1,6 +1,6 @@
 import { useFormContext, useFieldArray } from 'react-hook-form';
 import { CountryComponent } from '../CountryComponent/CountryComponent';
-import { ReportForm } from '../../data/ReportForm';
+import { ReportForm } from '../../domain/ReportForm';
 
 export const Countries = (): JSX.Element => {
     const {
@@ -12,9 +12,11 @@ export const Countries = (): JSX.Element => {
 
     return (
         <div>
-            Country section
+            <h3>Visited Countries</h3>
             {fields.map((c, i) => (
-                <CountryComponent key={c.id} index={i} country={c.country} />
+                <div id={c.htmlId} key={c.id}>
+                    <CountryComponent index={i} country={c.country} />
+                </div>
             ))}
         </div>
     );

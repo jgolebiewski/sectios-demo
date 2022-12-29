@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ReportService } from '../services/ReportService';
-import { ReportForm } from '../data/ReportForm';
+import { ReportForm } from '../domain/ReportForm';
 interface UseReport {
     loading: boolean;
     report: ReportForm | null;

@@ -1,2 +1,1 @@
-export * from './ui/Report/ReportComponent';
-export * from './domain/ReportModel';
+export { ReportComponent } from './ui/Report/ReportComponent';

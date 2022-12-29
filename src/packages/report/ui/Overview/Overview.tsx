@@ -1,47 +1,45 @@
 import { useFormContext } from 'react-hook-form';
 import { CustomTextField } from '@reports/ui';
 import { Wrapper } from '../Wrapper/Wrapper.styled';
-import { OverviewModel } from '../../domain/OverviewModel';
-import { Report } from '../../../../domain/Report';
 import { PeriodComponent } from '@reports/ui/PeriodComponent/PeriodComponent';
 import { FormError } from '@reports/ui/FormError/FormError';
 import { ErrorMessage } from '@hookform/error-message';
+import { ReportForm } from '../../domain/ReportForm';
+import { OverViewWrapper } from './Overview.styled';
 
-interface OverviewProps {
-    overview?: OverviewModel;
-}
-
-export const Overview: React.FC<OverviewProps> = (props) => {
+export const Overview = ({ htmlId }: { htmlId: string }): JSX.Element => {
     const {
         control,
         formState: { errors },
-    } = useFormContext<Report>();
+    } = useFormContext<ReportForm>();
 
     return (
-        <Wrapper>
-            <h3>General Section</h3>
-            <CustomTextField isRequired={true} name="budgetAssumed" label="Budget assumed" control={control} />
-            <ErrorMessage
-                name="budgetAssumed"
-                errors={errors}
-                render={({ message }) => <FormError>{message}</FormError>}
-            />
+        <OverViewWrapper>
+            <h3 id={htmlId}>General Section</h3>
+            <Wrapper>
+                <CustomTextField isRequired={true} name="budgetAssumed" label="Budget assumed" control={control} />
+                <ErrorMessage
+                    name="budgetAssumed"
+                    errors={errors}
+                    render={({ message }) => <FormError>{message}</FormError>}
+                />
 
-            <CustomTextField isRequired={true} name="budgetSpent" control={control} label="Budget spent" />
+                <CustomTextField isRequired={true} name="budgetSpent" control={control} label="Budget spent" />
 
-            <ErrorMessage
-                name="budgetSpent"
-                errors={errors}
-                render={({ message }) => <FormError>{message}</FormError>}
-            />
+                <ErrorMessage
+                    name="budgetSpent"
+                    errors={errors}
+                    render={({ message }) => <FormError>{message}</FormError>}
+                />
 
-            <PeriodComponent
-                fromField="vacationPeriod.from"
-                toField="vacationPeriod.to"
-                control={control}
-                errors={errors}
-                label="Vacations period"
-            />
-        </Wrapper>
+                <PeriodComponent
+                    fromField="vacationPeriod.from"
+                    toField="vacationPeriod.to"
+                    control={control}
+                    errors={errors}
+                    label="Vacations period"
+                />
+            </Wrapper>
+        </OverViewWrapper>
     );
 };

@@ -1,1 +1,1 @@
-export * from './ui/ReportCreator';
+export { ReportCreator } from './ui/ReportCreator';

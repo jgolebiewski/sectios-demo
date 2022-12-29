@@ -1,5 +1,4 @@
 import { ErrorMessage } from '@hookform/error-message';
-import { ReportForm } from '@reports/report/data/ReportForm';
 import { Control, FieldErrors, useWatch } from 'react-hook-form';
 import { CustomDatePicker } from '../CustomDatePicker/CustomDatePicker';
 import { FormError } from '../FormError/FormError';
@@ -10,7 +9,7 @@ interface PeriodComponentProps {
     toField: string;
     label: string;
     control: Control<any, object>;
-    errors: FieldErrors<ReportForm> | undefined;
+    errors: FieldErrors<object> | undefined;
     isRequired?: boolean;
 }
 

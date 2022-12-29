@@ -6,7 +6,7 @@ import { AccommodationSelector } from '@reports/ui/AccommodationSelector/Accommo
 import { FormError } from '@reports/ui/FormError/FormError';
 import { CustomMultiselect } from '../../../ui/CustomMultiselect/CustomMultiselect';
 import { MeanOfTransportSelector } from '@reports/ui/MeansOfTransportSelector/MeansOfTransportSelector';
-import { ReportForm } from '../../data/ReportForm';
+import { ReportForm } from '../../domain/ReportForm';
 import { ErrorMessage } from '@hookform/error-message';
 
 export const CountryComponent = ({ index, country }: { index: number; country: Country | null }): JSX.Element => {
@@ -17,7 +17,7 @@ export const CountryComponent = ({ index, country }: { index: number; country: C
 
     return (
         <Wrapper>
-            <h5>{country?.name}</h5>
+            <h4>{country?.name}</h4>
 
             <CustomMultiselect
                 control={control}
