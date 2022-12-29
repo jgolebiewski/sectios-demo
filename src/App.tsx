@@ -5,6 +5,7 @@ import { MainPage } from './pages/main/MainPage';
 import { ReportCreatorPage } from './pages/report-creator/ReportCreatorPage';
 import { DefaultLayout } from './layouts/DefaultLayout';
 import { ErrorHandler } from './packages/error-ui';
+import { ConsoleLogger } from './core/ConsoleLogger';
 
 function App() {
     initializeIcons();
@@ -14,7 +15,7 @@ function App() {
 
     return (
         <DefaultLayout>
-            <ErrorHandler>
+            <ErrorHandler logger={new ConsoleLogger()}>
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<MainPage />} />
