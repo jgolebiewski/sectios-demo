@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { reportValidationSchema } from '../../schema/validation-schema';
 import { DefaultButton, PrimaryButton } from '@fluentui/react';
 import { Overview } from '../Overview/Overview';
-import { Countries } from '../Countries/Countries';
+import { CountriesSectionComponent } from '../CountriesSectionComponent/CountriesSectionComponent';
 import { ReportForm } from '../../domain/ReportForm';
 import { Link } from 'react-router-dom';
 
@@ -38,7 +38,7 @@ export const ReportComponent = ({ report }: { report: ReportForm }): JSX.Element
                     <Link to={'/'}>Back</Link>
                     <form onSubmit={methods.handleSubmit(onSubmit)} id="reportForm">
                         <Overview htmlId={report.overview.htmlId} />
-                        <Countries />
+                        <CountriesSectionComponent />
                     </form>
                 </div>
             </ReportWrapper>

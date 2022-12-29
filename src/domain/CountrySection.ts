@@ -3,7 +3,6 @@ import { Country } from './Country';
 import { MeanOfTransport } from './MeanOfTransport';
 import { Period } from './Period';
 import { v4 as uuidv4 } from 'uuid';
-import { MeanOfTransportOption } from '../core/types';
 import { Accommodation } from './Accommodation';
 
 export class CountrySection {
@@ -13,7 +12,6 @@ export class CountrySection {
     period: Period;
     accommodations: Accommodation[];
     meansOfTransport: MeanOfTransport[];
-    meansOfTransportOption: MeanOfTransportOption[];
 
     constructor() {
         this.id = uuidv4();
@@ -22,6 +20,5 @@ export class CountrySection {
         this.accommodations = [];
         this.meansOfTransport = [];
         this.cities = [];
-        this.meansOfTransportOption = [];
     }
 }
