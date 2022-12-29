@@ -1,0 +1,5 @@
+{
+    "name": "@reports/error-ui",
+    "version": "1.0",
+    "main": "./index.ts"
+}

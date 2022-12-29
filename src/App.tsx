@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { MainPage } from './pages/main/MainPage';
 import { ReportCreatorPage } from './pages/report-creator/ReportCreatorPage';
 import { DefaultLayout } from './layouts/DefaultLayout';
+import { ErrorHandler } from './packages/error-ui';
 
 function App() {
     initializeIcons();
@@ -13,13 +14,15 @@ function App() {
 
     return (
         <DefaultLayout>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<MainPage />} />
-                    <Route path="/report-creator" element={<ReportCreatorPage />} />
-                    <Route path="/report/:id" element={<ReportPage />} />
-                </Routes>
-            </BrowserRouter>
+            <ErrorHandler>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<MainPage />} />
+                        <Route path="/report-creator" element={<ReportCreatorPage />} />
+                        <Route path="/report/:id" element={<ReportPage />} />
+                    </Routes>
+                </BrowserRouter>
+            </ErrorHandler>
         </DefaultLayout>
     );
 }
