@@ -1,6 +1,6 @@
 
 import { initializeIcons } from '@fluentui/react';
-
+import { QueryClient, QueryClientProvider } from 'react-query';
 import '../src/index.css';
 
 initializeIcons();
@@ -14,3 +14,13 @@ export const parameters = {
     },
   },
 }
+
+const queryClient = new QueryClient();
+
+export const decorators = [
+  (Story) => (
+    <QueryClientProvider client={queryClient}>
+      <Story />
+    </QueryClientProvider>
+  ),
+];
