@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { ReportsListService } from '../../services/ReportsListService';
 import { DetailsList, IColumn, Link, SelectionMode } from '@fluentui/react';
 import { Report } from '../../../../domain/Report';
 import moment from 'moment/moment';
 import { DEFAULT_DATETIME_FORMAT } from '../../../../core/defaults';
 
+import { useReportList } from '../../hooks/useReportList';
+
 export const ReportsList = (): JSX.Element => {
-    const [reports, setReports] = useState<Report[]>([]);
+    const { reports, isLoading, isSuccess } = useReportList();
 
     const columns: IColumn[] = [
         {
@@ -35,16 +35,12 @@ export const ReportsList = (): JSX.Element => {
             ),
         },
     ];
-    useEffect(() => {
-        (async () => {
-            const response = await ReportsListService.getReports();
-            setReports(response.data);
-        })();
-    }, []);
 
     return (
         <div>
-            <DetailsList items={reports} columns={columns} selectionMode={SelectionMode.none} />
+            {isLoading && <div>Loading...</div>}
+            {isSuccess && <DetailsList items={reports} columns={columns} selectionMode={SelectionMode.none} />}
+            {isSuccess && reports.length === 0 && <h5>No records</h5>}
         </div>
     );
 };

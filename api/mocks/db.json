@@ -307,6 +307,44 @@
         }
       ],
       "created": "2022-12-19T17:52:47.902Z"
+    },
+    {
+      "id": "0ec002b5-9cf9-4cac-a4db-b8aeb1dbb3c4",
+      "budgetAssumed": 0,
+      "budgetSpent": 0,
+      "vacationPeriod": {
+        "from": "2023-05-17T22:00:00.000Z",
+        "to": "2023-05-31T22:00:00.000Z"
+      },
+      "countrySections": [
+        {
+          "id": "74ee0bc1-547a-493c-829d-783127706571",
+          "country": {
+            "id": "DE1",
+            "code": "DE",
+            "name": "Germany",
+            "cities": [
+              {
+                "id": "C2",
+                "name": "Berlin"
+              }
+            ]
+          },
+          "cities": [],
+          "period": {
+            "from": null,
+            "to": null
+          },
+          "accommodations": [],
+          "meansOfTransport": [
+            {
+              "id": "2",
+              "name": "Ferry"
+            }
+          ]
+        }
+      ],
+      "created": "2023-05-18T06:15:49.989Z"
     }
   ]
 }
