@@ -3,7 +3,7 @@ import { ReportService } from '../services/ReportService';
 import { ReportForm } from '../domain/ReportForm';
 import { useQuery } from 'react-query';
 import { EntityResponse } from '../../../core/types';
-import { Report } from '../../../domain/Report';
+import { Report } from '@reports/domain';
 interface UseReport {
     loading: boolean;
     report: ReportForm | null;

@@ -1,5 +1,5 @@
 import { AccommodationOption, MeanOfTransportOption } from '../../../core/types';
-import { CountrySection } from '../../../domain/CountrySection';
+import { CountrySection } from '@reports/domain';
 import { v4 as uuidv4 } from 'uuid';
 
 export class CountrySectionForm extends CountrySection {

@@ -1,4 +1,4 @@
-import { Report } from '../../../domain/Report';
+import { Report } from '../../domain/Report';
 import { CountrySectionForm } from './CountrySectionsForm';
 import { v4 as uuidv4 } from 'uuid';
 import { OverviewSectionForm } from './OverviewSectionForm';

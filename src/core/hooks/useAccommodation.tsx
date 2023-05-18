@@ -2,18 +2,17 @@ import { IDropdownOption } from '@fluentui/react';
 import { useQuery } from 'react-query';
 import { DataService } from '../services/DataService';
 
-interface UseCountries {
+interface UseAccommodation {
     options: IDropdownOption[];
     isSuccess: boolean;
 }
 
-export const useCountries = (): UseCountries => {
+export const useAccommodation = (): UseAccommodation => {
     const { data, isSuccess } = useQuery(
-        'countries',
+        'accommodation',
         async () => {
-            const response = await DataService.getCountries();
-            const mapped = response.data.map((country) => ({ key: country.id, text: country.name }));
-            return mapped;
+            const response = await DataService.getAccommodations();
+            return response.data.map((mt) => ({ key: mt.id, id: mt.id, text: mt.name }));
         },
         {
             useErrorBoundary: true,
@@ -21,5 +20,8 @@ export const useCountries = (): UseCountries => {
         }
     );
 
-    return { options: data || [], isSuccess };
+    return {
+        options: data || [],
+        isSuccess,
+    };
 };

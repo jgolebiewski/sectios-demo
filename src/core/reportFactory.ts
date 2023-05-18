@@ -1,7 +1,7 @@
 import { DraftReport } from '@reports/report-creator/domain/types';
-import { Report } from '../domain/Report';
-import { CountrySection } from '../domain/CountrySection';
-import { Period } from '../domain/Period';
+import { Report } from '../packages/domain/Report';
+import { CountrySection } from '../packages/domain/CountrySection';
+import { Period } from '../packages/domain/Period';
 import { DataService } from './services/DataService';
 
 const countrySectionFactory = async (draft: DraftReport): Promise<CountrySection[]> => {

@@ -345,6 +345,78 @@
         }
       ],
       "created": "2023-05-18T06:15:49.989Z"
+    },
+    {
+      "id": "5bcfe478-b612-4814-8095-b770f9e415c0",
+      "budgetAssumed": 0,
+      "budgetSpent": 0,
+      "vacationPeriod": {
+        "from": "2023-05-14T22:00:00.000Z",
+        "to": "2023-05-25T22:00:00.000Z"
+      },
+      "countrySections": [
+        {
+          "id": "49dcb3ea-0695-4fa2-9e20-586fdf0bad0b",
+          "country": {
+            "id": "DE1",
+            "code": "DE",
+            "name": "Germany",
+            "cities": [
+              {
+                "id": "C2",
+                "name": "Berlin"
+              }
+            ]
+          },
+          "cities": [],
+          "period": {
+            "from": null,
+            "to": null
+          },
+          "accommodations": [],
+          "meansOfTransport": [
+            {
+              "id": "1",
+              "name": "Car"
+            },
+            {
+              "id": "2",
+              "name": "Ferry"
+            }
+          ]
+        },
+        {
+          "id": "021cf3bc-003e-4ebc-992e-9495859894ac",
+          "country": {
+            "id": "PL1",
+            "code": "PL",
+            "name": "Poland",
+            "cities": [
+              {
+                "id": "C1",
+                "name": "Warsaw"
+              }
+            ]
+          },
+          "cities": [],
+          "period": {
+            "from": null,
+            "to": null
+          },
+          "accommodations": [],
+          "meansOfTransport": [
+            {
+              "id": "1",
+              "name": "Car"
+            },
+            {
+              "id": "2",
+              "name": "Ferry"
+            }
+          ]
+        }
+      ],
+      "created": "2023-05-18T15:01:20.263Z"
     }
   ]
 }

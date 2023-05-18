@@ -1,5 +1,5 @@
-import { Period } from '../../../domain/Period';
 import { v4 as uuidv4 } from 'uuid';
+import { Period } from '@reports/domain';
 
 export class OverviewSectionForm {
     htmlId: string;

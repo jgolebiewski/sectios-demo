@@ -1,6 +1,6 @@
 import { Meta, ComponentStory } from '@storybook/react';
 import { useForm, FormProvider } from 'react-hook-form';
-import { Period } from '../../../domain/Period';
+import { Period } from '../../domain/Period';
 import { MeanOfTransportSelector } from './MeansOfTransportSelector';
 
 export default {

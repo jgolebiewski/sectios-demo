@@ -1,6 +1,4 @@
-import { Accommodation } from '../../domain/Accommodation';
-import { Country } from '../../domain/Country';
-import { MeanOfTransport } from '../../domain/MeanOfTransport';
+import { Accommodation, Country, MeanOfTransport } from '@reports/domain';
 import { HttpClient, getBaseUrl } from '../HttpClient';
 import { Response } from '../types';
 

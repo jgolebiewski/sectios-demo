@@ -1,7 +1,7 @@
 import { PeriodComponent } from '@reports/ui/PeriodComponent/PeriodComponent';
 import { useFormContext } from 'react-hook-form';
 import { Wrapper } from '../Wrapper/Wrapper.styled';
-import { Country } from '../../../../domain/Country';
+import { Country } from '../../../domain/Country';
 import { AccommodationSelector } from '@reports/ui/AccommodationSelector/AccommodationSelector';
 import { FormError } from '@reports/ui/FormError/FormError';
 import { CustomMultiselect } from '../../../ui/CustomMultiselect/CustomMultiselect';

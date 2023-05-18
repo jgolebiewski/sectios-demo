@@ -5,8 +5,8 @@ import { DataService } from '../../../../core/services/DataService';
 import { SummaryLabel } from './ReportSummary.styled';
 import { DraftReport } from '../../domain/types';
 import { ReportCreatorSection } from '../ReportCreator.styled';
-import { Country } from '../../../../domain/Country';
-import { MeanOfTransport } from '../../../../domain/MeanOfTransport';
+import { Country } from '../../../domain/Country';
+import { MeanOfTransport } from '../../../domain/MeanOfTransport';
 
 export const ReportSummary = ({ report }: { report: DraftReport }): JSX.Element => {
     const fields = Object.keys(report) as Array<keyof typeof report>;

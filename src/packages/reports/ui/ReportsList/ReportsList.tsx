@@ -1,5 +1,5 @@
 import { DetailsList, IColumn, Link, SelectionMode } from '@fluentui/react';
-import { Report } from '../../../../domain/Report';
+import { Report } from '../../../domain/Report';
 import moment from 'moment/moment';
 import { DEFAULT_DATETIME_FORMAT } from '../../../../core/defaults';
 
