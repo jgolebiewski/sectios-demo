@@ -40,8 +40,8 @@
     "lint:fix": "eslint --fix .",
     "prepare": "husky install",
     "check:circular-deps": "madge --warning --circular --extensions ts,tsx src",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public",
+    "storybook": "storybook dev",
+    "build-storybook": "storybook build -s public",
     "api": "json-server --port 3004 --routes api/routes.json --watch api/mocks/db.json"
   },
   "jest": {
@@ -83,12 +83,9 @@
     "@storybook/addon-essentials": "^7.6.15",
     "@storybook/addon-interactions": "^6.5.15",
     "@storybook/addon-links": "^6.5.15",
-    "@storybook/builder-webpack5": "^6.5.15",
-    "@storybook/manager-webpack5": "^6.5.15",
     "@storybook/node-logger": "^6.5.15",
     "@storybook/preset-create-react-app": "^4.1.2",
     "@storybook/react": "^7.6.15",
-    "@storybook/testing-library": "^0.0.13",
     "@testing-library/react": "^13.4.0",
     "@types/jest": "^29.2.2",
     "@types/lodash": "^4.14.178",
@@ -121,6 +118,7 @@
     "msw": "^0.49.2",
     "prettier": "^2.7.1",
     "prop-types": "^15.8.1",
+    "storybook": "^8.1.4",
     "ts-jest": "^29.0.3",
     "typescript": "^4.6.4",
     "webpack": "^5.74.0"
