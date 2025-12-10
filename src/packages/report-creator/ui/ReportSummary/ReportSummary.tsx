@@ -1,6 +1,6 @@
 import { DEFAULT_DATE_FORMAT } from '../../../../core/defaults';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
+import { JSX, useEffect, useState } from 'react';
 import { DataService } from '../../../../core/services/DataService';
 import { SummaryLabel } from './ReportSummary.styled';
 import { DraftReport } from '../../domain/types';
@@ -81,7 +81,7 @@ export const ReportSummary = ({ report }: { report: DraftReport }): JSX.Element 
         <ReportCreatorSection>
             {fields.map((field, index: number) => (
                 <div key={index}>
-                    <SummaryLabel>{niceLabel(field)}</SummaryLabel>: {formatValue(field)}
+                    <SummaryLabel>{niceLabel(field)}</SummaryLabel>: <>{formatValue(field)}</>
                 </div>
             ))}
         </ReportCreatorSection>

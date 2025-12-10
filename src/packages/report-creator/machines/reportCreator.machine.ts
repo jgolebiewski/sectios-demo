@@ -53,11 +53,11 @@ export const reportCreateMachine =
                         NEXT: [
                             {
                                 target: 'END_REPORT',
-                                cond: 'lessThenFiveDays',
+                                guard: 'lessThenFiveDays',
                             },
                             {
                                 target: 'CHOOSE_COUNTRY',
-                                cond: 'periodStateIsValid',
+                                guard: 'periodStateIsValid',
                             },
                         ],
                     },
@@ -72,7 +72,7 @@ export const reportCreateMachine =
                         },
                         NEXT: {
                             target: 'SUMMARY',
-                            cond: 'chooseNumberOfPeopleIsValid',
+                            guard: 'chooseNumberOfPeopleIsValid',
                         },
                         PREV: {
                             target: 'CHOOSE_MEANS_OF_TRANSPORT',
@@ -83,7 +83,7 @@ export const reportCreateMachine =
                     on: {
                         FINISH: {
                             target: 'SAVING_REPORT',
-                            cond: 'chooseNumberOfPeopleIsValid',
+                            guard: 'chooseNumberOfPeopleIsValid',
                         },
                         PREV: {
                             target: 'CHOOSE_NUMBER_OF_PEOPLE',
@@ -102,7 +102,7 @@ export const reportCreateMachine =
                         onDone: [
                             {
                                 target: 'FINISH',
-                                cond: 'reportIsValid',
+                                guard: 'reportIsValid',
                             },
                         ],
                         onError: [
@@ -122,7 +122,7 @@ export const reportCreateMachine =
                         },
                         NEXT: {
                             target: 'CHOOSE_MEANS_OF_TRANSPORT',
-                            cond: 'countriesIsValid',
+                            guard: 'countriesIsValid',
                         },
                     },
                 },
@@ -136,7 +136,7 @@ export const reportCreateMachine =
                         },
                         NEXT: {
                             target: 'CHOOSE_NUMBER_OF_PEOPLE',
-                            cond: 'meansOfTransportIsValid',
+                            guard: 'meansOfTransportIsValid',
                         },
                     },
                 },
@@ -178,8 +178,9 @@ export const reportCreateMachine =
             actions: {
                 assignFormChange: assign((context, event) => {
                     const ev = event as { type: 'FORM_CHANGE'; value: DraftReportContext };
+                    console.log(ev);
                     return ev.value;
                 }),
             },
-        }
+        },
     );

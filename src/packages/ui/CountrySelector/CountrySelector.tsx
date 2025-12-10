@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { useCountries } from '../../../core/hooks/useCountries';
 import { CustomFieldProps } from '../CustomFieldProps';
 import { CustomMultiselect } from '../CustomMultiselect/CustomMultiselect';

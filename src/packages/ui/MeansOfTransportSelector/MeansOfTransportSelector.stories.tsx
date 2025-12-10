@@ -1,4 +1,4 @@
-import { Meta, ComponentStory } from '@storybook/react';
+import { Meta, ComponentStory } from '@storybook/react-webpack5';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Period } from '../../domain/Period';
 import { MeanOfTransportSelector } from './MeansOfTransportSelector';

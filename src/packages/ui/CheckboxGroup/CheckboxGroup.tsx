@@ -1,5 +1,5 @@
 import { Checkbox, IDropdownOption } from '@fluentui/react';
-import { FormEvent } from 'react';
+import { FormEvent, JSX } from 'react';
 import { Controller } from 'react-hook-form';
 import { CustomFieldProps } from '../CustomFieldProps';
 

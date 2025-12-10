@@ -6,6 +6,7 @@ import { CountrySelector } from './CountrySelector';
 import { getBaseUrl } from '../../../core/HttpClient';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useCountries } from '../../../core/hooks/useCountries';
+import { JSX } from 'react';
 
 type HandlerParams = Parameters<typeof setupServer>;
 const setupMockServer = (...handlers: HandlerParams) => {

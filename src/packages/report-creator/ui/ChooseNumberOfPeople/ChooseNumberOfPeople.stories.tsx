@@ -1,6 +1,6 @@
 import { PrimaryButton } from '@fluentui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ComponentStory } from '@storybook/react';
+import { ComponentStory } from '@storybook/react-webpack5';
 import { useForm, FormProvider } from 'react-hook-form';
 import { reportCreatorSchema } from '../../schemas/validation-schema';
 import { ChooseNumberOfPeople } from './ChooseNumberOfPeople';

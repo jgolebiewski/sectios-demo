@@ -1,7 +1,8 @@
-import { Meta, ComponentStory } from '@storybook/react';
+import { Meta, ComponentStory } from '@storybook/react-webpack5';
 import { ErrorHandler } from './ErrorHandler';
 import { Logger } from '@reports/error-ui/domain/Logger';
-import { action } from '@storybook/addon-actions';
+import { JSX } from 'react';
+import { action } from 'storybook/actions';
 
 const send = action('logger');
 export const StorybookLogger: Logger = {
@@ -15,7 +16,7 @@ export const StorybookLogger: Logger = {
 interface KaboomProps {
     shouldFail?: () => boolean;
     // notify?(message: string): void;
-    children?: any;
+    children?: unknown;
 }
 
 const throwAlways = () => true;

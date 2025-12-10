@@ -11,7 +11,7 @@ import { Ending } from './Ending/Ending';
 import { ChooseNumberOfPeople } from './ChooseNumberOfPeople/ChooseNumberOfPeople';
 import { DefaultButton, PrimaryButton } from '@fluentui/react';
 import { ButtonsWrapper, CreatorWrapper } from './ReportCreator.styled';
-import { useEffect } from 'react';
+import { JSX, useEffect } from 'react';
 import { ReportSummary } from './ReportSummary/ReportSummary';
 import { ReportCreatorService } from '../services/ReportCreatorService';
 import { DraftReport, DraftReportContext } from '../domain/types';
@@ -40,7 +40,7 @@ export const ReportCreator = (): JSX.Element => {
     });
 
     const handlePreviousState = () => {
-        send('PREV');
+        send({ type: 'PREV' });
     };
 
     const handleNextState = () => {
@@ -50,7 +50,7 @@ export const ReportCreator = (): JSX.Element => {
             formErrors: methods.formState.errors,
         };
         send({ type: 'FORM_CHANGE', value: ctx });
-        send('NEXT');
+        send({ type: 'NEXT' });
     };
 
     const showPrevNext = () => {
@@ -68,10 +68,12 @@ export const ReportCreator = (): JSX.Element => {
 
     return (
         <CreatorWrapper>
-            <h1>Report Creator - {state.value}</h1>
+            <h1>
+                Report Creator - <>{state.value}</>
+            </h1>
             <FormProvider {...methods}>
                 <form>
-                    {state.matches('WELCOME') && <Greetings handleStart={() => send('START')} />}
+                    {state.matches('WELCOME') && <Greetings handleStart={() => send({ type: 'START' })} />}
                     {state.matches('CHOOSE_PERIOD') && <ChoosePeriod />}
                     {state.matches('CHOOSE_NUMBER_OF_PEOPLE') && <ChooseNumberOfPeople />}
                     {state.matches('CHOOSE_COUNTRY') && <ChooseCountry />}
@@ -93,7 +95,7 @@ export const ReportCreator = (): JSX.Element => {
                             <ReportSummary report={state.context.data} />
                             <ButtonsWrapper>
                                 <DefaultButton onClick={handlePreviousState}>Previous</DefaultButton>
-                                <PrimaryButton onClick={() => send('FINISH')}>Finish</PrimaryButton>
+                                <PrimaryButton onClick={() => send({ type: 'FINISH' })}>Finish</PrimaryButton>
                             </ButtonsWrapper>
                         </>
                     )}

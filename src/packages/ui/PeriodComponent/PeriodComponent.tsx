@@ -3,6 +3,7 @@ import { Control, FieldErrors, useWatch } from 'react-hook-form';
 import { CustomDatePicker } from '../CustomDatePicker/CustomDatePicker';
 import { FormError } from '../FormError/FormError';
 import { PeriodWrapper } from './PeriodComponent.styled';
+import { JSX } from 'react';
 
 interface PeriodComponentProps {
     fromField: string;
@@ -18,7 +19,7 @@ export const PeriodComponent = (props: PeriodComponentProps): JSX.Element => {
 
     const startDate = useWatch({ control, name: fromField });
     return (
-        <PeriodWrapper isRequired={isRequired || false}>
+        <PeriodWrapper required={isRequired || false}>
             <label>{label}</label>
             <div>
                 <CustomDatePicker name={fromField} label="Date from" control={control} maxDate={new Date()} />

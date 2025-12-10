@@ -1,5 +1,5 @@
 import { TextField } from '@fluentui/react';
-import { FC } from 'react';
+import { FC, JSX } from 'react';
 import { Controller } from 'react-hook-form';
 import { CustomFieldProps } from '../CustomFieldProps';
 

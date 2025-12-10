@@ -1,7 +1,7 @@
 import { MessageBar, MessageBarType } from '@fluentui/react';
 import { ErrorContentWrapper } from './ErrorContent.styled';
 
-import { useState } from 'react';
+import { JSX, useState } from 'react';
 
 export const ErrorContent = ({
     error,

@@ -8,6 +8,7 @@ import { Overview } from '../Overview/Overview';
 import { CountriesSectionComponent } from '../CountriesSectionComponent/CountriesSectionComponent';
 import { ReportForm } from '../../domain/ReportForm';
 import { Link } from 'react-router-dom';
+import { JSX } from 'react';
 
 export const ReportComponent = ({ report }: { report: ReportForm }): JSX.Element => {
     const methods = useForm<ReportForm>({

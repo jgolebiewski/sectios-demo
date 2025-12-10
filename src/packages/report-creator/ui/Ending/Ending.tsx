@@ -1,6 +1,7 @@
 import { Link } from '@fluentui/react';
 import { ReportCreatorSection } from '../ReportCreator.styled';
 import { EndingWrapper } from './Ending.styled';
+import { JSX } from 'react';
 
 export const Ending = (): JSX.Element => {
     return (

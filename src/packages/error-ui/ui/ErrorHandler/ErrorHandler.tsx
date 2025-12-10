@@ -1,6 +1,7 @@
 import { ErrorBoundary } from 'react-error-boundary';
 import { Logger } from '../../domain/Logger';
 import { ErrorContent } from './ErrorContent/ErrorContent';
+import { JSX } from 'react';
 
 interface ErrorBoundaryProps {
     logger: Logger;

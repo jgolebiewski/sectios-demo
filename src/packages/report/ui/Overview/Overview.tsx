@@ -6,6 +6,7 @@ import { FormError } from '@reports/ui/FormError/FormError';
 import { ErrorMessage } from '@hookform/error-message';
 import { ReportForm } from '../../domain/ReportForm';
 import { OverViewWrapper } from './Overview.styled';
+import { JSX } from 'react';
 
 export const Overview = ({ htmlId }: { htmlId: string }): JSX.Element => {
     const {

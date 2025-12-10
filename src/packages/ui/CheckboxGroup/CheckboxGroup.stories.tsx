@@ -1,8 +1,8 @@
-import { ComponentStory } from '@storybook/react';
+import { ComponentStory } from '@storybook/react-vite';
 import { useForm, FormProvider } from 'react-hook-form';
 import { CheckboxGroup } from './CheckboxGroup';
 
-export default {
+const meta = {
     title: 'UI/CheckboxGroup',
     component: CheckboxGroup,
     args: {
@@ -20,7 +20,6 @@ export const _CheckboxGroup: ComponentStory<typeof CheckboxGroup> = (args: any) 
             <form>
                 <CheckboxGroup {...args} control={methods.control} name="groups" />
             </form>
-            <pre>{methods.formState.errors.groups || 'no errors'}</pre>
         </FormProvider>
     );
 };

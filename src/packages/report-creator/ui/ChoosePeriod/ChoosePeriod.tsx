@@ -5,6 +5,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import { DraftReport } from '../../domain/types';
 import { ReportCreatorSection } from '../ReportCreator.styled';
 import { ChoosePeriodWrapper } from './ChoosePeriod.styled';
+import { JSX } from 'react';
 
 const calculateDuration = (start: string | null, end: string | null): string => {
     if (!start || !end) {

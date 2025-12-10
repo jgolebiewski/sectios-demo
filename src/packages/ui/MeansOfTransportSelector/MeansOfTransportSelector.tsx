@@ -5,6 +5,7 @@ import { CheckboxGroup } from '../CheckboxGroup/CheckboxGroup';
 import { CustomFieldProps } from '../CustomFieldProps';
 import { FormError } from '../FormError/FormError';
 import { useMeansOfTransport } from '../../../core/hooks/useMeansOfTransport';
+import { JSX } from 'react';
 
 type Err = FieldErrors<Report> | undefined;
 

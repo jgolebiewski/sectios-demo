@@ -1,4 +1,4 @@
-import { ComponentStory } from '@storybook/react';
+import { ComponentStory } from '@storybook/react-vite';
 import { useForm, FormProvider } from 'react-hook-form';
 import { CustomNumberField } from './CustomNumberField';
 
@@ -15,7 +15,6 @@ export const _CustomNumberField: ComponentStory<typeof CustomNumberField> = (arg
             <form>
                 <CustomNumberField {...args} control={methods.control} name="numberOfPeople" label="Number of people" />
             </form>
-            <pre>{methods.formState.errors.groups || 'no errors'}</pre>
         </FormProvider>
     );
 };

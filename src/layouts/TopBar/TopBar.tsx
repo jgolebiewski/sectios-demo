@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { TopBarWrapper } from './TopBar.styled';
 
 export const TopBar = (): JSX.Element => {

@@ -8,6 +8,7 @@ import { CustomMultiselect } from '../../../ui/CustomMultiselect/CustomMultisele
 import { MeanOfTransportSelector } from '@reports/ui/MeansOfTransportSelector/MeansOfTransportSelector';
 import { ReportForm } from '../../domain/ReportForm';
 import { ErrorMessage } from '@hookform/error-message';
+import { JSX } from 'react';
 
 export const CountryComponent = ({ index, country }: { index: number; country: Country | null }): JSX.Element => {
     const {

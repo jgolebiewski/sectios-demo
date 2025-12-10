@@ -4,6 +4,7 @@ import moment from 'moment/moment';
 import { DEFAULT_DATETIME_FORMAT } from '../../../../core/defaults';
 
 import { useReportList } from '../../hooks/useReportList';
+import { JSX } from 'react';
 
 export const ReportsList = (): JSX.Element => {
     const { reports, isLoading, isSuccess } = useReportList();

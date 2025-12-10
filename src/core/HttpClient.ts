@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getBaseUrl = () => {
-    return process.env.REACT_APP_API;
+    return import.meta.env.VITE_APP_API;
 };
 
 export const HttpClient = {

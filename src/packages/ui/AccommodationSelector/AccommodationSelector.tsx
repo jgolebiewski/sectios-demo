@@ -5,6 +5,7 @@ import { CustomFieldProps } from '../CustomFieldProps';
 import { CustomMultiselect } from '../CustomMultiselect/CustomMultiselect';
 import { FormError } from '../FormError/FormError';
 import { useAccommodation } from '../../../core/hooks/useAccommodation';
+import { JSX } from 'react';
 
 type Err = FieldErrors<Report> | undefined;
 
