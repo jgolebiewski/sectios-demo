@@ -1,4 +1,5 @@
 import { ActionButton, IIconProps } from '@fluentui/react';
+import { JSX } from 'react';
 import styled from 'styled-components';
 
 interface ButtonProps {

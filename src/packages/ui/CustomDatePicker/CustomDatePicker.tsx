@@ -29,7 +29,7 @@ export const CustomDatePicker: FC<CustomFieldProps & DatePickerProps> = ({
                         {...field}
                         value={field.value ? new Date(field.value) : undefined}
                         onSelectDate={(date: Date | null | undefined) => {
-                            field.onChange(date ? date.toISOString() : null);
+                            field.onChange(date ? date : null);
                         }}
                         formatDate={(date?: Date) => moment(date).format(DEFAULT_DATE_FORMAT)}
                         placeholder="Select a date..."

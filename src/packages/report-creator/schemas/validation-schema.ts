@@ -3,8 +3,8 @@ import { object, date, ref, array, number, string } from 'yup';
 import { DEFAULT_DATE_FORMAT } from '../../../core/defaults';
 
 export const reportCreatorSchema = object({
-    meansOfTransport: array().of(string()).min(1, 'Select at least one option'),
-    countries: array().of(string()).min(1, 'Select at least one country'),
+    meansOfTransport: array().of(string().required()).required().min(1, 'Select at least one option'),
+    countries: array().of(string().required()).required().min(1, 'Select at least one country').required(),
     from: date().typeError('Provide valid date').required('Field From is required'),
     to: date()
         .typeError('Provide valid date')

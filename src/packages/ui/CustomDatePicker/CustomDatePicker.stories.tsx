@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CustomDatePicker } from '@reports/ui';
-import { Meta, ComponentStory } from '@storybook/react';
+import { Meta, ComponentStory } from '@storybook/react-webpack5';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import * as yup from 'yup';
@@ -29,7 +29,6 @@ const Template: ComponentStory<typeof CustomDatePicker> = (args: any) => {
             <form>
                 <CustomDatePicker {...args} control={methods.control} name="date" label="Date picker" />
             </form>
-            <pre>{methods.formState.errors.date || 'no errors'}</pre>
         </FormProvider>
     );
 };

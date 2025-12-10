@@ -3,6 +3,7 @@ import { FormError } from '@reports/ui/FormError/FormError';
 import { useFormContext } from 'react-hook-form';
 import { DraftReport } from '../../domain/types';
 import { ReportCreatorSection } from '../ReportCreator.styled';
+import { JSX } from 'react';
 
 export const ChooseCountry = (): JSX.Element => {
     const {

@@ -13,4 +13,11 @@ export class Period {
         period.to = new Date(to);
         return period;
     }
+
+    static createFromDates(from: Date, to: Date): Period {
+        const period = new Period();
+        period.from = from;
+        period.to = to;
+        return period;
+    }
 }

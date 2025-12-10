@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 
 import './index.css';
 import App from './App';
@@ -16,9 +16,9 @@ const root = createRoot(rootElement);
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 root.render(
-    <React.StrictMode>
+    <StrictMode>
         <App />
-    </React.StrictMode>
+    </StrictMode>,
 );
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

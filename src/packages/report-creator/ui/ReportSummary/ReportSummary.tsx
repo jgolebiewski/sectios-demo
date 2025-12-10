@@ -1,6 +1,6 @@
 import { DEFAULT_DATE_FORMAT } from '../../../../core/defaults';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
+import { JSX, useEffect, useState } from 'react';
 import { DataService } from '../../../../core/services/DataService';
 import { SummaryLabel } from './ReportSummary.styled';
 import { DraftReport } from '../../domain/types';
@@ -44,7 +44,7 @@ export const ReportSummary = ({ report }: { report: DraftReport }): JSX.Element 
 
     const formatValue = (field: keyof typeof report) => {
         const value = report[field];
-
+        console.log({ value });
         if (!value) {
             return value;
         }
@@ -70,18 +70,18 @@ export const ReportSummary = ({ report }: { report: DraftReport }): JSX.Element 
             return selected.map((c) => c.name).join(', ');
         }
 
-        if (value.toString().indexOf('Z') !== -1 && !Array.isArray(value)) {
+        if (value instanceof Date) {
             return moment(value).format(DEFAULT_DATE_FORMAT);
-        } else {
-            return value;
         }
+
+        return value;
     };
 
     return (
         <ReportCreatorSection>
             {fields.map((field, index: number) => (
                 <div key={index}>
-                    <SummaryLabel>{niceLabel(field)}</SummaryLabel>: {formatValue(field)}
+                    <SummaryLabel>{niceLabel(field)}</SummaryLabel>: <>{formatValue(field)}</>
                 </div>
             ))}
         </ReportCreatorSection>

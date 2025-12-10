@@ -1,4 +1,4 @@
-import { Meta, ComponentStory } from '@storybook/react';
+import { Meta, ComponentStory } from '@storybook/react-webpack5';
 import { Ending } from './Ending';
 
 export default {

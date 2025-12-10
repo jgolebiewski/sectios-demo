@@ -3,6 +3,7 @@ import { MeanOfTransportSelector } from '@reports/ui/MeansOfTransportSelector/Me
 import { useFormContext } from 'react-hook-form';
 import { DraftReport } from '../../domain/types';
 import { ReportCreatorSection } from '../ReportCreator.styled';
+import { JSX } from 'react';
 
 export const ChooseMeanOfTransportation = (): JSX.Element => {
     const {

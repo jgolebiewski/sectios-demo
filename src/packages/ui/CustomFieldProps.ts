@@ -8,5 +8,6 @@ export interface CustomFieldProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     control: Control<any, object>;
     isRequired?: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onChange?: (value: any) => void;
 }

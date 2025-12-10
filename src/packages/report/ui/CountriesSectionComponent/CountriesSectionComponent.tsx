@@ -1,6 +1,7 @@
 import { useFormContext, useFieldArray } from 'react-hook-form';
 import { CountryComponent } from '../CountryComponent/CountryComponent';
 import { ReportForm } from '../../domain/ReportForm';
+import { JSX } from 'react';
 
 export const CountriesSectionComponent = (): JSX.Element => {
     const {

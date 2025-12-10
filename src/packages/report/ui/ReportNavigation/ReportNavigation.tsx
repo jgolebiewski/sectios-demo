@@ -1,6 +1,7 @@
 import { Link } from '@fluentui/react';
 import styled from 'styled-components';
 import { ReportForm } from '../../domain/ReportForm';
+import { JSX } from 'react';
 
 const NavStyled = styled.nav`
     position: fixed;

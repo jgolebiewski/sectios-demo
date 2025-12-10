@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PeriodWrapper = styled.div`
+export const PeriodWrapper = styled.div<{ required: boolean }>`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 20px;
@@ -17,7 +17,7 @@ export const PeriodWrapper = styled.div`
 
     > label:after {
         content: ' *';
-        color: ${(props: { isRequired: boolean }) => (props.isRequired ? '#a4262c' : 'white')};
+        color: ${(props) => (props.required ? '#a4262c' : 'white')};
         padding-right: 12px;
     }
 `;

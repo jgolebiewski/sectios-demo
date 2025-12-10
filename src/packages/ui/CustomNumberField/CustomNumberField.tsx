@@ -1,6 +1,7 @@
 import { MaskedTextField } from '@fluentui/react';
 import { Controller } from 'react-hook-form';
 import { CustomFieldProps } from '../CustomFieldProps';
+import { JSX } from 'react';
 
 export const CustomNumberField = (props: CustomFieldProps): JSX.Element => {
     const { name, label, control, disabled } = props;

@@ -417,6 +417,48 @@
         }
       ],
       "created": "2023-05-18T15:01:20.263Z"
+    },
+    {
+      "id": "fa3fb72f-cc4d-4296-9cf5-f9d8e6e89f47",
+      "budgetAssumed": 0,
+      "budgetSpent": 0,
+      "vacationPeriod": {
+        "from": "2025-11-30T23:00:00.000Z",
+        "to": "2025-12-10T13:53:17.987Z"
+      },
+      "countrySections": [
+        {
+          "id": "f2bb31aa-9b7f-4a7f-8cee-5f52bab15821",
+          "country": {
+            "id": "DE1",
+            "code": "DE",
+            "name": "Germany",
+            "cities": [
+              {
+                "id": "C2",
+                "name": "Berlin"
+              }
+            ]
+          },
+          "cities": [],
+          "period": {
+            "from": null,
+            "to": null
+          },
+          "accommodations": [],
+          "meansOfTransport": [
+            {
+              "id": "1",
+              "name": "Car"
+            },
+            {
+              "id": "0",
+              "name": "Airplane"
+            }
+          ]
+        }
+      ],
+      "created": "2025-12-10T13:53:31.179Z"
     }
   ]
 }

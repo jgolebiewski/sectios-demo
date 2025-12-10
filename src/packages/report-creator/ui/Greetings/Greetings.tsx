@@ -1,6 +1,7 @@
 import { Link, PrimaryButton } from '@fluentui/react';
 import { ReportCreatorSection } from '../ReportCreator.styled';
 import { GreetingsWrapper } from './Greetings.styled';
+import { JSX } from 'react';
 
 export const Greetings = ({ handleStart }: { handleStart: () => void }): JSX.Element => {
     return (

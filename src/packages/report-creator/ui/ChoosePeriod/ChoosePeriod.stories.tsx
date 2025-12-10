@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ComponentStory, Meta } from '@storybook/react';
+import { ComponentStory, Meta } from '@storybook/react-webpack5';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ChoosePeriod } from './ChoosePeriod';
 import { reportCreatorSchema } from '../../schemas/validation-schema';

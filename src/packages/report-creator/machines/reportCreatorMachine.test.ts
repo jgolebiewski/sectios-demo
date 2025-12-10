@@ -1,128 +1,163 @@
-import { interpret } from 'xstate';
-import { done } from 'xstate/lib/actions';
+import { createActor, fromPromise } from 'xstate';
+
 import flushPromises from 'flush-promises';
 
 import { reportCreateMachine } from './reportCreator.machine';
+import { vi } from 'vitest';
 
-const mockMachine = reportCreateMachine.withConfig({
-    services: {
-        saveReport: async (context, _event) => {
-            const draft = context.data;
-            draft.creationDate = new Date();
-            draft.id = '_unique_id_';
-            return Promise.resolve(draft);
-        },
-    },
-});
+const mockMachine = reportCreateMachine;
 
 describe('Report Create Machine', () => {
     it('should reach END_REPORT state when period is shorter then 5 days', async () => {
-        const spy = jest.fn();
+        const spy = vi.fn();
 
-        const service = interpret(mockMachine).onTransition((state) => {
-            const { value, context } = state;
-            context.data.from = new Date('2022-10-10').toISOString();
-            context.data.to = new Date('2022-10-11').toISOString();
-            spy({ value, context });
+        const actor = createActor(mockMachine);
+
+        actor.start();
+
+        const ctx = actor.getSnapshot().context;
+
+        actor.send({ type: 'START' });
+
+        const ctxAfterStart = actor.getSnapshot().context;
+
+        actor.send({
+            type: 'FORM_CHANGE',
+            value: {
+                ...ctxAfterStart,
+                data: {
+                    ...ctxAfterStart.data,
+                    from: new Date(),
+                    to: new Date(),
+                },
+            },
         });
 
-        const ctx = service.getSnapshot().context;
+        expect(actor.getSnapshot().matches('CHOOSE_PERIOD')).toBeTruthy();
 
-        service.start();
-        service.send({ type: 'START' });
-        expect(service.getSnapshot().matches('CHOOSE_PERIOD')).toBeTruthy();
+        actor.send({ type: 'NEXT' });
 
-        service.send({ type: 'FORM_CHANGE', value: ctx });
-        service.send({ type: 'NEXT' });
         await flushPromises();
 
-        expect(service.getSnapshot().matches('END_REPORT')).toBeTruthy();
+        expect(actor.getSnapshot().matches('END_REPORT')).toBeTruthy();
     });
 
     it('should not go to CHOOSE_COUNTRY when CHOOSE_PERIOD is invalid', async () => {
-        const service = interpret(mockMachine).onTransition((state) => {
-            const { value, context } = state;
-            context.data.from = '';
-            context.data.to = '';
-            context.formErrors = {
-                from: { type: 'some' },
-            };
+        // const mockMachine = reportCreateMachine;
+        const actor = createActor(mockMachine);
 
-            if (state.matches('CHOOSE_PERIOD')) {
-                done('CHOOSE_PERIOD', {});
-            }
+        actor.start();
+        actor.send({ type: 'START' });
+
+        const ctx = actor.getSnapshot().context;
+
+        actor.send({
+            type: 'FORM_CHANGE',
+            value: {
+                ...ctx,
+                data: {
+                    ...ctx.data,
+                    from: new Date('2024-12-12'),
+                    to: new Date(),
+                },
+                formErrors: {
+                    ...ctx.formErrors,
+                    from: { type: 'some' },
+                },
+            },
         });
 
-        const ctx = service.getSnapshot().context;
+        actor.send({ type: 'NEXT' });
 
-        service.start();
-        service.send({ type: 'START' });
-
-        service.send({ type: 'FORM_CHANGE', value: ctx });
-        service.send({ type: 'NEXT' });
-
-        expect(service.getSnapshot().matches('CHOOSE_PERIOD')).toBeTruthy();
+        expect(actor.getSnapshot().matches('CHOOSE_PERIOD')).toBeTruthy();
     });
 
     it('should call service on FINISH', async () => {
         let called = false;
 
-        const machine = reportCreateMachine.withConfig({
-            services: {
-                saveReport: (context, _event) => {
+        const machine = mockMachine.provide({
+            actors: {
+                saveReport: fromPromise(async ({ input }) => {
                     called = true;
                     return Promise.resolve(true);
-                },
+                }),
             },
         });
 
-        const service = interpret(machine).onTransition((state) => {
-            if (state.matches('FINISH')) {
-                expect(called).toBeTruthy();
-                done('FINISH');
-            }
+        const actor = createActor(machine);
+
+        actor.start();
+        actor.send({ type: 'START' });
+
+        const ctx = actor.getSnapshot().context;
+        actor.send({
+            type: 'FORM_CHANGE',
+            value: {
+                ...ctx,
+                data: {
+                    from: new Date('2024-12-10'),
+                    to: new Date('2024-12-20'),
+                    countries: ['PL1'],
+                    meansOfTransport: ['1'],
+                    numberOfPeople: 2,
+                },
+                formErrors: {},
+            },
         });
-        service.start();
-        service.send({ type: 'START' });
-        service.send({ type: 'NEXT' });
-        service.send({ type: 'NEXT' });
-        service.send({ type: 'NEXT' });
-        service.send({ type: 'NEXT' });
-        service.send({ type: 'FINISH' });
+        actor.send({ type: 'NEXT' }); // CHOOSE_PERIOD -> CHOOSE_COUNTRY / END_REPORT itd.
+        actor.send({ type: 'NEXT' });
+        actor.send({ type: 'NEXT' });
+        actor.send({ type: 'NEXT' }); // aż dojdziesz do SUMMARY (jak w Twojej sekwencji)
+        actor.send({ type: 'FINISH' }); // powinno wejść w SAVING_REPORT i wywołać saveReport
+
         await flushPromises();
+
+        expect(actor.getSnapshot().matches('FINISH')).toBeTruthy();
+        expect(called).toBeTruthy();
     });
 
     it('should end with ERROR_OCCURRED state', async () => {
-        const machine = reportCreateMachine.withConfig({
-            services: {
-                saveReport: (_context, _event) => {
-                    return Promise.reject('Error');
-                },
+        const machine = reportCreateMachine.provide({
+            actors: {
+                saveReport: fromPromise(async ({ input }) => {
+                    throw new Error('Error');
+                }),
             },
         });
 
-        const service = interpret(machine).onTransition((state) => {
-            const { context } = state;
-            context.data.from = new Date('2022-10-10').toISOString();
-            context.data.to = new Date('2022-10-21').toISOString();
-            context.data.countries = ['PL1'];
-            context.data.meansOfTransport = ['1'];
-            context.data.numberOfPeople = 2;
-            context.formErrors = {};
+        const actor = createActor(machine);
 
-            if (state.matches('ERROR_OCCURRED')) {
-                done('ERROR_OCCURRED');
-            }
+        actor.start();
+        actor.send({ type: 'START' });
+
+        // ustawiamy poprawne dane tak jak w teście v4, ale eventem:
+        const ctx = actor.getSnapshot().context;
+
+        actor.send({
+            type: 'FORM_CHANGE',
+            value: {
+                ...ctx,
+                data: {
+                    ...ctx.data,
+                    from: new Date('2022-10-11'),
+                    to: new Date('2022-10-21'),
+                    countries: ['PL1'],
+                    meansOfTransport: ['1'],
+                    numberOfPeople: 2,
+                },
+                formErrors: {},
+            },
         });
-        service.start();
-        service.send({ type: 'START' });
-        service.send({ type: 'NEXT' });
-        service.send({ type: 'NEXT' });
-        service.send({ type: 'NEXT' });
-        service.send({ type: 'NEXT' });
-        service.send({ type: 'FINISH' });
+
+        // przejście przez CHOOSE_PERIOD → ... → SUMMARY
+        actor.send({ type: 'NEXT' });
+        actor.send({ type: 'NEXT' });
+        actor.send({ type: 'NEXT' });
+        actor.send({ type: 'NEXT' });
+        actor.send({ type: 'FINISH' });
+
         await flushPromises();
 
-        expect(service.getSnapshot().matches('ERROR_OCCURRED')).toBeTruthy();
+        expect(actor.getSnapshot().matches('ERROR_OCCURRED')).toBeTruthy();
     });
 });

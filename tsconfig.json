@@ -1,22 +1,18 @@
 {
     "compilerOptions": {
-        "target": "es5",
-        "lib": ["dom", "dom.iterable", "esnext"],
-        "allowJs": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
+        "target": "ESNext",
+        "module": "ESNext",
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "moduleResolution": "bundler",
+        "jsx": "react-jsx",
+        "allowJs": false,
         "strict": true,
-        "forceConsistentCasingInFileNames": true,
-        "noFallthroughCasesInSwitch": true,
-        "module": "esnext",
-        "moduleResolution": "node",
+        "noEmit": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "noEmit": true,
-        "jsx": "react-jsx",
-        "noUnusedLocals": false
+        "types": ["vite/client", "vitest"]
     },
-    "exclude": ["api/index.js"],
     "include": ["src"]
 }

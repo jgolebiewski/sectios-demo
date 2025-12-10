@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { Layout } from './DefaultLayout.styled';
 import { TopBar } from './TopBar/TopBar';
 

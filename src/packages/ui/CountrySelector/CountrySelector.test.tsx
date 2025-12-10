@@ -1,11 +1,12 @@
-import { render, screen, renderHook, waitFor } from '@testing-library/react';
+import { render, renderHook, screen, waitFor } from '@testing-library/react';
 import { useForm } from 'react-hook-form';
 import { setupServer } from 'msw/node';
-import { rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 import { CountrySelector } from './CountrySelector';
 import { getBaseUrl } from '../../../core/HttpClient';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useCountries } from '../../../core/hooks/useCountries';
+import { JSX } from 'react';
 
 type HandlerParams = Parameters<typeof setupServer>;
 const setupMockServer = (...handlers: HandlerParams) => {
@@ -14,7 +15,7 @@ const setupMockServer = (...handlers: HandlerParams) => {
     beforeAll(() =>
         server.listen({
             onUnhandledRequest: 'warn',
-        })
+        }),
     );
     afterEach(() => server.resetHandlers());
     afterAll(() => server.close());
@@ -23,9 +24,9 @@ const setupMockServer = (...handlers: HandlerParams) => {
 };
 
 const handler = (spy: jest.Mock) => [
-    rest.get(getBaseUrl() + 'api/countries', async (req, res, ctx) => {
-        spy(req);
-        return res(ctx.json([]));
+    http.get(getBaseUrl() + 'api/countries', async ({ request }) => {
+        spy(request);
+        return HttpResponse.json([]);
     }),
 ];
 
@@ -46,7 +47,7 @@ describe('Country selector test', () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <CountrySelector name="countries" control={result.current.control} label="Country" />
-            </QueryClientProvider>
+            </QueryClientProvider>,
         );
         await screen.findByText('Country');
         expect(spy).toHaveBeenCalledTimes(1);
