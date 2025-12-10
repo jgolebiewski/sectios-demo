@@ -12,7 +12,7 @@
         "skipLibCheck": true,
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "types": ["vite/client", "jest"]
+        "types": ["vite/client", "vitest"]
     },
     "include": ["src"]
 }

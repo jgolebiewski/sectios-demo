@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 // opcjonalnie, jeśli chcesz aliasy z tsconfig
@@ -8,6 +9,17 @@ export default defineConfig({
     react(),
     // tsconfigPaths(),
   ],
+   test: {
+    environment: 'jsdom',
+    globals: true,                 // żeby mieć describe/it/expect bez importu
+    setupFiles: ['./src/setupTests.ts'], // odpowiednik CRA-owego setupTests
+    coverage: {
+      reporter: ['text', 'lcov'],
+      reportsDirectory: './coverage',
+    },
+    // jeśli używasz aliasów, a nie masz tsconfigPaths:
+    // alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
+  },
   server: {
     port: 3000,
     // jeśli miałeś proxy w CRA (setupProxy.js) – odwzoruj tu:

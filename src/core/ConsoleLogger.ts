@@ -8,7 +8,7 @@ export class ConsoleLogger implements Logger {
         console.log(
             `%cDEBUG: %c${message}`,
             'background-color: yellow; padding: 2px; font-weight: bold;',
-            'background-color:white; color: red;'
+            'background-color:white; color: red;',
         );
     }
 
@@ -16,7 +16,7 @@ export class ConsoleLogger implements Logger {
         console.info(
             `%cINFO: %c${message}`,
             'background-color: #f0f8ff; color: #252d33; padding: 4px',
-            'background-color:white;'
+            'background-color:white;',
         );
     }
 

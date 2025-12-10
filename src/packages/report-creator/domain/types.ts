@@ -2,9 +2,9 @@ import { FieldErrorsImpl } from 'react-hook-form';
 import { CountryOption, MeanOfTransportOption } from '../../../core/types';
 
 export interface DraftReport {
-    from: string;
-    to: string;
-    numberOfPeople: number | null;
+    from: Date;
+    to: Date;
+    numberOfPeople: number;
     meansOfTransport: MeanOfTransportOption[];
     countries: CountryOption[];
     creationDate?: Date;

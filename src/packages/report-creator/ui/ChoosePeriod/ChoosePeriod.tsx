@@ -6,8 +6,10 @@ import { DraftReport } from '../../domain/types';
 import { ReportCreatorSection } from '../ReportCreator.styled';
 import { ChoosePeriodWrapper } from './ChoosePeriod.styled';
 import { JSX } from 'react';
+import { DataService } from '../../../../core/services/DataService';
+import { DateService } from '../../../../core/services/DateService';
 
-const calculateDuration = (start: string | null, end: string | null): string => {
+const calculateDuration = (start: string | null | Date, end: string | null | Date): string => {
     if (!start || !end) {
         return '';
     }
@@ -25,7 +27,8 @@ export const ChoosePeriod = (): JSX.Element => {
     const startDate = useWatch({ control, name: `from` });
     const endDate = useWatch({ control, name: `to` });
 
-    const duration = calculateDuration(startDate, endDate);
+    const duration = DateService.calculateDuration(startDate, endDate);
+    console.log({ duration }, { startDate }, { endDate });
 
     return (
         <ReportCreatorSection>

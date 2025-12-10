@@ -8,6 +8,7 @@ export default {
     args: {},
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const _CustomNumberField: ComponentStory<typeof CustomNumberField> = (args: any) => {
     const methods = useForm();
     return (

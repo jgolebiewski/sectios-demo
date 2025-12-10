@@ -28,7 +28,7 @@ const countrySectionFactory = async (draft: DraftReport): Promise<CountrySection
 
 const create = async (draftReport: DraftReport): Promise<Report> => {
     const report = new Report();
-    report.vacationPeriod = Period.createFromString(draftReport.from, draftReport.to);
+    report.vacationPeriod = Period.createFromDates(draftReport.from, draftReport.to);
     report.countrySections = await countrySectionFactory(draftReport);
 
     return report;
